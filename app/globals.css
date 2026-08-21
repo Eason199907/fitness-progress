@@ -1,0 +1,1365 @@
+@import "tailwindcss";
+:root {
+  --ink: #17201d;
+  --muted: #6d7771;
+  --paper: #f5f5ef;
+  --line: #dfe2da;
+  --green: #a9d74c;
+  --deep: #173f32;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Inter, "PingFang SC", system-ui, sans-serif;
+}
+.topbar {
+  height: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 max(5vw, 24px);
+  border-bottom: 1px solid var(--line);
+  background: #f5f5eff0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(14px);
+}
+.brand {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.mark {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--deep);
+  color: var(--green);
+  display: grid;
+  place-items: center;
+  font: 800 22px Georgia;
+}
+.brand div {
+  display: flex;
+  flex-direction: column;
+}
+.brand b {
+  font-size: 15px;
+}
+.brand small {
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  margin-top: 3px;
+}
+.status {
+  font-size: 12px;
+  color: var(--muted);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.status span {
+  width: 8px;
+  height: 8px;
+  background: var(--green);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px #dcecbf;
+}
+.hero {
+  max-width: 1180px;
+  margin: auto;
+  padding: 82px 32px 58px;
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: 70px;
+  align-items: end;
+}
+.eyebrow,
+.section-head p,
+.panel-title p {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  font-weight: 800;
+  color: #55832b;
+}
+.hero h1 {
+  font-family: Georgia, "Songti SC", serif;
+  font-size: clamp(48px, 6vw, 84px);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  margin: 18px 0 28px;
+  font-weight: 500;
+}
+.hero h1 em {
+  font-style: normal;
+  color: #5a882f;
+}
+.lead {
+  max-width: 630px;
+  font-size: 17px;
+  line-height: 1.85;
+  color: #5f6964;
+}
+.hero-tags {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+.hero-tags span {
+  border: 1px solid #cbd0c7;
+  padding: 8px 12px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 700;
+}
+.weight-card {
+  background: var(--deep);
+  color: white;
+  padding: 28px 30px;
+  box-shadow: 18px 18px 0 #dfe7cf;
+}
+.weight-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #dce5df;
+}
+.weight-head b {
+  color: var(--green);
+}
+.weight-card > strong {
+  font: 400 76px Georgia;
+  display: block;
+  margin: 12px 0;
+}
+.weight-card strong small {
+  font: 500 16px system-ui;
+  margin-left: 6px;
+}
+.scale {
+  height: 8px;
+  background: #436358;
+  position: relative;
+  margin-bottom: 10px;
+}
+.scale i {
+  display: block;
+  width: 83%;
+  height: 100%;
+  background: var(--green);
+}
+.scale span {
+  position: absolute;
+  top: 14px;
+  font-size: 10px;
+  color: #aebdb7;
+}
+.scale span:nth-of-type(1) {
+  left: 0;
+}
+.scale span:nth-of-type(2) {
+  right: 0;
+}
+.weight-card > p {
+  font-size: 12px;
+  margin: 30px 0 0;
+  color: #b8c9c1;
+}
+.tabs {
+  max-width: 1180px;
+  margin: auto;
+  padding: 0 32px;
+  display: flex;
+  border-bottom: 1px solid #cfd3ca;
+  gap: 30px;
+}
+.tabs button {
+  background: none;
+  border: 0;
+  padding: 16px 4px;
+  color: #7c837f;
+  font-size: 13px;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+}
+.tabs button.active {
+  color: var(--deep);
+  font-weight: 800;
+  border-color: var(--green);
+}
+.content {
+  max-width: 1180px;
+  margin: auto;
+  padding: 54px 32px 100px;
+}
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  margin-bottom: 25px;
+}
+.section-head p,
+.panel-title p {
+  margin: 0 0 7px;
+}
+.section-head h2 {
+  font:
+    500 34px Georgia,
+    "Songti SC",
+    serif;
+  margin: 0;
+}
+.section-head > span {
+  font-size: 12px;
+  color: var(--muted);
+}
+.metric-grid {
+  display: grid;
+  grid-template-columns: 1.25fr repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.metric {
+  background: #fafaf6;
+  padding: 28px;
+  min-height: 190px;
+  display: flex;
+  flex-direction: column;
+}
+.metric.feature {
+  background: #e8eedc;
+}
+.metric > span {
+  font-size: 12px;
+  color: var(--muted);
+}
+.metric strong {
+  font: 500 46px Georgia;
+  margin: auto 0 16px;
+}
+.metric strong small {
+  font: 500 12px system-ui;
+  margin-left: 5px;
+}
+.metric p {
+  margin: 0;
+  font-size: 11px;
+  color: var(--muted);
+}
+.metric p.good {
+  color: #397537;
+}
+.meter {
+  height: 5px;
+  background: #cad2bf;
+  margin-bottom: 12px;
+}
+.meter i {
+  height: 100%;
+  display: block;
+  background: #e66552;
+}
+.split {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 22px;
+  margin-top: 22px;
+}
+.panel {
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 28px;
+}
+.panel-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+.panel-title h3 {
+  margin: 0;
+  font:
+    500 25px Georgia,
+    "Songti SC",
+    serif;
+}
+.panel-title > b {
+  font-size: 11px;
+  color: #54832b;
+}
+.rings {
+  display: flex;
+  justify-content: space-around;
+  margin: 35px 0 20px;
+}
+.ring-wrap {
+  text-align: center;
+}
+.ring {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: conic-gradient(var(--ring) var(--p), #e5e8e1 0);
+  position: relative;
+}
+.ring:after {
+  content: "";
+  width: 75px;
+  height: 75px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+}
+.ring span {
+  font: 500 23px Georgia;
+  z-index: 1;
+}
+.ring small {
+  font: 10px system-ui;
+}
+.ring-wrap p {
+  font-size: 11px;
+}
+.caption {
+  text-align: center;
+  color: var(--muted);
+  font-size: 11px;
+}
+.focus {
+  background: var(--deep);
+  color: white;
+}
+.focus .panel-title p {
+  color: var(--green);
+}
+.focus .panel-title span {
+  font: 40px Georgia;
+  color: #527063;
+}
+.focus ol {
+  list-style: none;
+  margin: 25px 0 0;
+  padding: 0;
+}
+.focus li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  padding: 18px 0;
+  border-top: 1px solid #3c5c50;
+}
+.focus li b {
+  font-size: 14px;
+}
+.focus li small {
+  color: #a8b9b2;
+}
+.note {
+  margin-top: 22px;
+  border-left: 4px solid #eccf59;
+  background: #f1eddd;
+  padding: 20px 24px;
+  display: flex;
+  gap: 28px;
+}
+.note b {
+  white-space: nowrap;
+}
+.note p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+.session-list {
+  border-top: 1px solid var(--line);
+}
+.session {
+  display: grid;
+  grid-template-columns: 52px 80px 1fr 36px;
+  align-items: center;
+  gap: 20px;
+  padding: 22px 6px;
+  border-bottom: 1px solid var(--line);
+}
+.session-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+}
+.coral {
+  background: #ffe2dc;
+  color: #c9513d;
+}
+.blue {
+  background: #dde6ff;
+  color: #385dc4;
+}
+.lime {
+  background: #e5f0cb;
+  color: #568122;
+}
+.session-date {
+  display: flex;
+  flex-direction: column;
+}
+.session-date small {
+  font-size: 9px;
+  color: var(--muted);
+}
+.session-date b {
+  font: 500 19px Georgia;
+}
+.session-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.session-main h3 {
+  margin: 0 0 6px;
+  font-size: 15px;
+}
+.session-main p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+.session-main strong {
+  font: 500 28px Georgia;
+}
+.session-main strong small {
+  font: 10px system-ui;
+}
+.session-no {
+  font: 16px Georgia;
+  color: #b9bdb8;
+}
+.progress-callout {
+  margin-top: 28px;
+  background: var(--green);
+  padding: 26px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.progress-callout p {
+  margin: 0 0 6px;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+}
+.progress-callout h3 {
+  margin: 0;
+  font:
+    500 23px Georgia,
+    "Songti SC",
+    serif;
+}
+.progress-callout > span {
+  font-size: 34px;
+}
+.home-calendar {
+  max-width: 1116px;
+  margin: 34px auto 0;
+  padding: 28px 32px;
+  background: #fff;
+  border: 1px solid var(--line);
+}
+.home-calendar-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  margin-bottom: 18px;
+}
+.home-calendar-title p {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  font-weight: 800;
+  color: #347fc3;
+  margin: 0 0 5px;
+}
+.home-calendar-title h2 {
+  font:
+    500 28px Georgia,
+    "Songti SC",
+    serif;
+  margin: 0;
+}
+.home-calendar-title > span {
+  font-size: 10px;
+  color: var(--muted);
+}
+.home-calendar-body {
+  display: grid;
+  grid-template-columns: 430px 1fr;
+  gap: 32px;
+  align-items: stretch;
+}
+.home-calendar .mini-calendar {
+  padding: 14px;
+}
+.home-calendar .calendar-grid button > span:first-child {
+  font-size: 13px;
+}
+.home-calendar-summary {
+  background: linear-gradient(145deg, #10284d, #174b7b);
+  color: #fff;
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+}
+.home-calendar-summary > p {
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: #8fc8f5;
+  margin: 0;
+}
+.home-calendar-summary > strong {
+  font: 500 66px Georgia;
+  margin: 12px 0;
+}
+.home-calendar-summary > strong small {
+  font: 500 11px system-ui;
+  margin-left: 8px;
+}
+.home-calendar-summary > div {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.home-calendar-summary > div span {
+  font-size: 10px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  color: #d8e8f5;
+}
+.home-calendar-summary > b {
+  font-size: 11px;
+  margin-top: auto;
+  padding-top: 18px;
+  border-top: 1px solid #ffffff24;
+  color: #a9d9ff;
+}
+.training-content {
+  padding-top: 34px;
+}
+.calendar-panel {
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 18px;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+.calendar-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 13px;
+  padding: 0 2px;
+}
+.calendar-top > div:first-child {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.calendar-top p {
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  font-weight: 800;
+  color: #347fc3;
+  margin: 0;
+}
+.calendar-top b {
+  font: 600 16px system-ui;
+}
+.calendar-top > div:first-child span {
+  font-size: 9px;
+  color: var(--muted);
+  background: #edf3f9;
+  padding: 4px 7px;
+  border-radius: 99px;
+}
+.calendar-legend {
+  display: flex;
+  gap: 13px;
+}
+.calendar-legend span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 9px;
+  color: var(--muted);
+}
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.dot.chest {
+  background: #ef8f7c;
+}
+.dot.back {
+  background: #5b7fd8;
+}
+.dot.legs {
+  background: #35a992;
+}
+.dot.cardio {
+  background: #8ae8bd;
+}
+.calendar-layout {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 16px;
+  align-items: stretch;
+}
+.mini-calendar {
+  min-width: 0;
+  padding: 12px;
+  background: #f7f9fc;
+  border: 1px solid #e8edf4;
+}
+.weekdays,
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+.weekdays span {
+  text-align: center;
+  padding: 3px 0 7px;
+  font-size: 9px;
+  color: var(--muted);
+}
+.calendar-grid button,
+.calendar-blank {
+  aspect-ratio: 1;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  position: relative;
+  border-radius: 9px;
+}
+.calendar-grid button {
+  cursor: pointer;
+  color: #8993a2;
+  transition: 0.18s ease;
+}
+.calendar-grid button:hover {
+  background: #eaf0f7;
+}
+.calendar-grid button > span:first-child {
+  font: 500 12px Georgia;
+}
+.calendar-grid button.has-workout {
+  color: #fff;
+  font-weight: 800;
+}
+.calendar-grid button.has-workout.coral {
+  background: #e97965;
+}
+.calendar-grid button.has-workout.blue {
+  background: #5276ca;
+}
+.calendar-grid button.has-workout.lime {
+  background: #269c87;
+}
+.calendar-grid button.selected {
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 4px #183f6d;
+  transform: translateY(-1px);
+}
+.workout-marks {
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  display: flex;
+  gap: 2px;
+}
+.workout-marks > i:first-child {
+  display: none;
+}
+.cardio-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: block;
+  background: #a6ffd1;
+  border: 1px solid #fff;
+}
+.calendar-hint {
+  text-align: center;
+  font-size: 9px;
+  color: #8a95a4;
+  margin: 9px 0 0;
+}
+.day-detail {
+  color: white;
+  padding: 18px 20px;
+  min-height: 385px;
+  display: flex;
+  flex-direction: column;
+  transition: background 0.2s ease;
+}
+.day-detail.coral {
+  background: linear-gradient(145deg, #873b35, #d76552);
+}
+.day-detail.blue {
+  background: linear-gradient(145deg, #173763, #315fa8);
+}
+.day-detail.lime {
+  background: linear-gradient(145deg, #12584f, #239985);
+  color: #fff;
+}
+.day-detail.lime * {
+  color: #fff;
+}
+.day-detail.rest {
+  background: linear-gradient(145deg, #3d4c60, #65758a);
+}
+.detail-heading {
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  align-items: center;
+  gap: 13px;
+  padding-bottom: 11px;
+  border-bottom: 1px solid #ffffff30;
+}
+.day-number {
+  border-right: 1px solid #ffffff45;
+  display: flex;
+  flex-direction: column;
+}
+.day-number small {
+  font-size: 8px;
+  color: #ffffffaa;
+  letter-spacing: 0.14em;
+}
+.day-number strong {
+  font: 500 25px Georgia;
+}
+.day-detail p {
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  color: #ffffffb8;
+  margin: 0 0 3px;
+}
+.day-detail h3 {
+  font-size: 15px;
+  margin: 0;
+}
+.session-meta {
+  display: grid;
+  grid-template-columns: 1.25fr 1.35fr 0.7fr 0.9fr;
+  gap: 7px;
+  margin: 10px 0 8px;
+}
+.session-meta > span {
+  font-size: 8px;
+  color: #ffffffa8;
+  background: #ffffff12;
+  padding: 7px 8px;
+  border-radius: 5px;
+}
+.session-meta b {
+  display: block;
+  color: #fff;
+  font-size: 10px;
+  margin-top: 3px;
+}
+.session-meta small {
+  display: block;
+  font-size: 8px;
+  margin-top: 2px;
+  color: #fff;
+}
+.warmup-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ffffff2b;
+  padding: 6px 8px;
+  margin-bottom: 3px;
+  font-size: 9px;
+}
+.warmup-block span {
+  color: #ffffffa8;
+}
+.warmup-block b {
+  color: #fff;
+}
+.exercise-table {
+  margin: 6px 0 7px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 16px;
+}
+.exercise-table > div {
+  display: grid;
+  grid-template-columns: 28px auto minmax(70px, 1fr);
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  border-bottom: 1px solid #ffffff20;
+  font-size: 9px;
+}
+.exercise-icon {
+  width: 27px;
+  height: 23px;
+  display: grid;
+  place-items: center;
+  border-radius: 6px;
+  color: #fff;
+  background: #ffffff18;
+  border: 1px solid #ffffff20;
+}
+.exercise-icon svg {
+  width: 23px;
+  height: 19px;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.day-detail.coral .exercise-icon {
+  color: #ffd7ce;
+}
+.day-detail.blue .exercise-icon {
+  color: #d7e4ff;
+}
+.day-detail.lime .exercise-icon {
+  color: #d1fff2;
+}
+.exercise-table b {
+  white-space: nowrap;
+}
+.exercise-table span {
+  text-align: right;
+  color: #ffffffc9;
+}
+.cardio-block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-left: 3px solid #94f4c6;
+  background: #0b493a65;
+  padding: 7px 9px;
+  margin: 1px 0 7px;
+}
+.cardio-block span {
+  font-size: 8px;
+  color: #aef5d1;
+}
+.cardio-block b {
+  font-size: 10px;
+  text-align: right;
+}
+.cardio-block small {
+  display: block;
+  font-size: 8px;
+  margin-top: 2px;
+  color: #d9ffec;
+}
+.calorie-row {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 7px;
+}
+.calorie-row span {
+  font-size: 8px;
+  color: #ffffffb5;
+}
+.calorie-row b {
+  font-size: 12px;
+}
+.energy-breakdown {
+  font-size: 8px;
+  color: #d6ffeb;
+  margin-top: 4px;
+  text-align: right;
+}
+.calorie-note,
+.rest-note {
+  font-size: 7px !important;
+  line-height: 1.5;
+  letter-spacing: 0 !important;
+  color: #ffffff80 !important;
+  margin: 5px 0 0 !important;
+}
+.timeline-head {
+  margin-top: 40px;
+}
+.composition-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  margin-bottom: 22px;
+}
+.composition-grid article {
+  background: #fff;
+  padding: 24px;
+}
+.composition-grid span {
+  font-size: 11px;
+  color: var(--muted);
+}
+.composition-grid strong {
+  display: block;
+  font: 500 35px Georgia;
+  margin: 18px 0 12px;
+}
+.composition-grid strong small {
+  font: 10px system-ui;
+  margin-left: 5px;
+}
+.composition-grid p {
+  font-size: 10px;
+  color: #397537;
+  margin: 0;
+}
+.composition-grid p.warn {
+  color: #c9513d;
+}
+.bar-list {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 40px;
+}
+.bar-list > div {
+  display: grid;
+  grid-template-columns: 62px 1fr 45px;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+}
+.bar-list > div > div {
+  height: 7px;
+  background: #ecefe9;
+}
+.bar-list i {
+  height: 100%;
+  display: block;
+  background: var(--deep);
+}
+.bar-list b {
+  text-align: right;
+}
+.symmetry {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  margin-top: 22px;
+}
+.symmetry > div {
+  padding: 25px;
+  background: #e7eed9;
+}
+.symmetry p {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  margin: 0;
+  color: #557133;
+}
+.symmetry h3 {
+  font:
+    500 21px Georgia,
+    "Songti SC",
+    serif;
+  margin: 12px 0;
+}
+.symmetry span {
+  font-size: 10px;
+  background: var(--deep);
+  color: white;
+  padding: 5px 9px;
+}
+.symmetry span.yellow {
+  background: #d5a82b;
+}
+footer {
+  border-top: 1px solid var(--line);
+  padding: 28px max(5vw, 24px);
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+}
+@media (max-width: 800px) {
+  .topbar {
+    height: 70px;
+  }
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 55px 20px 45px;
+    gap: 35px;
+  }
+  .hero h1 {
+    font-size: 51px;
+  }
+  .weight-card {
+    box-shadow: 10px 10px 0 #dfe7cf;
+  }
+  .tabs,
+  .content {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .metric-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .metric {
+    min-height: 160px;
+    padding: 20px;
+  }
+  .metric-grid .feature {
+    grid-column: span 2;
+  }
+  .split,
+  .symmetry {
+    grid-template-columns: 1fr;
+  }
+  .rings {
+    gap: 8px;
+  }
+  .ring {
+    width: 80px;
+    height: 80px;
+  }
+  .ring:after {
+    width: 62px;
+    height: 62px;
+  }
+  .composition-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .bar-list {
+    grid-template-columns: 1fr;
+  }
+  .session {
+    grid-template-columns: 44px 60px 1fr;
+    gap: 12px;
+  }
+  .session-main {
+    display: block;
+  }
+  .session-main strong {
+    font-size: 18px;
+  }
+  .session-no {
+    display: none;
+  }
+  .session-main p {
+    line-height: 1.5;
+  }
+  .section-head h2 {
+    font-size: 28px;
+  }
+  .section-head > span {
+    display: none;
+  }
+  .note {
+    display: block;
+  }
+  .note p {
+    margin-top: 8px;
+  }
+  .training-content {
+    padding-top: 22px;
+  }
+  .calendar-panel {
+    padding: 12px;
+  }
+  .calendar-top {
+    margin-bottom: 9px;
+  }
+  .calendar-top p {
+    display: none;
+  }
+  .calendar-legend {
+    gap: 7px;
+  }
+  .calendar-layout {
+    grid-template-columns: 1fr;
+  }
+  .mini-calendar {
+    max-width: 360px;
+    margin: auto;
+    width: 100%;
+    padding: 11px;
+  }
+  .day-detail {
+    min-height: 380px;
+    padding: 14px;
+  }
+  .session-meta {
+    grid-template-columns: 1fr 1fr;
+  }
+  .exercise-table {
+    grid-template-columns: 1fr;
+  }
+  .exercise-table > div {
+    font-size: 9px;
+  }
+  footer {
+    display: block;
+    line-height: 2;
+  }
+  .status {
+    display: none;
+  }
+}
+
+/* Blue visual system */
+:root {
+  --ink: #15233b;
+  --muted: #68758a;
+  --paper: #f4f7fb;
+  --line: #dbe3ef;
+  --green: #69b7ff;
+  --deep: #112a50;
+}
+.topbar {
+  background: #f4f7fbf0;
+}
+.status span {
+  box-shadow: 0 0 0 4px #dbeeff;
+}
+.eyebrow,
+.section-head p,
+.panel-title p {
+  color: #347fc3;
+}
+.hero h1 em {
+  color: #2879c8;
+}
+.weight-card {
+  background: linear-gradient(145deg, #10284d, #174b7b);
+  box-shadow: 18px 18px 0 #dce8f5;
+}
+.scale {
+  background: #45698d;
+}
+.metric.feature {
+  background: #e4f2ff;
+}
+.metric p.good,
+.composition-grid p {
+  color: #2575b9;
+}
+.meter {
+  background: #cbdced;
+}
+.meter i {
+  background: #438ed0;
+}
+.focus {
+  background: linear-gradient(150deg, #10284d, #173d69);
+}
+.focus .panel-title span {
+  color: #527ca5;
+}
+.focus li {
+  border-color: #365a7e;
+}
+.note {
+  border-left-color: #5aa9ed;
+  background: #e8f2fc;
+}
+.lime {
+  background: #dceffc;
+  color: #2878b4;
+}
+.progress-callout {
+  background: #8fcbff;
+}
+.symmetry > div {
+  background: #e3f0fb;
+}
+.symmetry p {
+  color: #276a9f;
+}
+.bar-list i {
+  background: #21689f;
+}
+@media (max-width: 800px) {
+  .weight-card {
+    box-shadow: 10px 10px 0 #dce8f5;
+  }
+}
+@media (max-width: 800px) {
+  .home-calendar {
+    margin: 24px 20px 0;
+    padding: 18px 14px;
+  }
+  .home-calendar-title {
+    align-items: start;
+  }
+  .home-calendar-title h2 {
+    font-size: 24px;
+  }
+  .home-calendar-title > span {
+    max-width: 105px;
+    text-align: right;
+    line-height: 1.5;
+  }
+  .home-calendar-body {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .home-calendar .mini-calendar {
+    max-width: none;
+    padding: 10px;
+  }
+  .home-calendar-summary {
+    padding: 16px 18px;
+    min-height: 150px;
+  }
+  .home-calendar-summary > strong {
+    font-size: 48px;
+    margin: 8px 0;
+  }
+  .home-calendar-summary > b {
+    margin-top: 14px;
+    padding-top: 12px;
+  }
+}
+.home-calendar-hero {
+  margin-bottom: 38px;
+}
+@media (max-width: 800px) {
+  .home-calendar-hero {
+    margin-bottom: 26px;
+  }
+}
+.day-detail .session-meta {
+  grid-template-columns: 1.3fr 1fr 1fr;
+}
+.intensity-card,
+.sleep-card {
+  border: 1px solid transparent;
+}
+.intensity-card.moderate {
+  background: #d8a73b33;
+  border-color: #ffd77855;
+}
+.intensity-card.high {
+  background: #ed833f35;
+  border-color: #ffb37b55;
+}
+.intensity-card.very-high {
+  background: #e65d5738;
+  border-color: #ff9a9555;
+}
+.intensity-track {
+  display: block;
+  height: 4px;
+  margin-top: 6px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: #ffffff2b;
+}
+.intensity-track > i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: #ffd25d;
+}
+.intensity-card.high .intensity-track > i {
+  background: #ff9b59;
+}
+.intensity-card.very-high .intensity-track > i {
+  background: #ff716c;
+}
+.sleep-card.good {
+  background: #45bd8730;
+  border-color: #8be0b955;
+}
+.sleep-card.fair {
+  background: #d8a73b2b;
+  border-color: #ffd7784d;
+}
+.sleep-card.poor {
+  background: #e65d5730;
+  border-color: #ff9a954d;
+}
+.sleep-scale {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  margin-top: 6px;
+}
+.sleep-scale > i {
+  display: block;
+  height: 4px;
+  border-radius: 99px;
+  background: #ffffff26;
+}
+.sleep-card.poor .sleep-scale > i:first-child {
+  background: #ff716c;
+}
+.sleep-card.fair .sleep-scale > i:nth-child(-n + 2) {
+  background: #ffd25d;
+}
+.sleep-card.good .sleep-scale > i {
+  background: #7de0af;
+}
+.detail-title-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+}
+.detail-title-row h3 {
+  margin-right: auto;
+}
+.detail-time {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #fff;
+  font-size: 10px;
+  white-space: nowrap;
+}
+.detail-time small {
+  display: inline;
+  padding: 2px 5px;
+  border-radius: 99px;
+  background: #ffffff1f;
+  color: #fff;
+  font-size: 8px;
+}
+.cardio-dot {
+  width: 10px;
+  height: 10px;
+  box-shadow: 0 0 0 2px #1e725b;
+}
+@media (max-width: 800px) {
+  .day-detail .session-meta {
+    grid-template-columns: 1.3fr 1fr 1fr;
+  }
+  .cardio-dot {
+    width: 9px;
+    height: 9px;
+  }
+}
