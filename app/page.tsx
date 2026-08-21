@@ -136,6 +136,54 @@ const sessions = [
     strengthCalories: null,
     cardioCalories: null,
   },
+  {
+    date: "08.19",
+    part: "胸/肩/腹",
+    intensity: 75,
+    note: "胸肩腹力量训练＋爬坡有氧",
+    tone: "coral",
+    time: "19:45–20:45",
+    cardioTime: "20:45–21:15",
+    mode: "力量训练 · 胸肩腹＋有氧训练",
+    sleep: "良好",
+    warmup: "胸椎灵活 · 肩袖热身 · 前锯肌激活",
+    calories: "560–700",
+    actions: [
+      { name: "史密斯站姿推肩", sets: "3组 15×空杆" },
+      { name: "蝴蝶机坐姿推肩", sets: "3组 15×20kg" },
+      { name: "蝴蝶机上斜卧推", sets: "4组 12×25kg" },
+      { name: "固定分推平板卧推", sets: "4组 10×5kg" },
+      { name: "固定下斜夹胸", sets: "3组 12×20kg" },
+      { name: "固定卷腹", sets: "4组 12×空载" },
+    ],
+    cardio: "爬坡有氧 · 30分钟 · 平均心率120 bpm",
+    strengthCalories: "280–390",
+    cardioCalories: "280–310",
+  },
+  {
+    date: "08.20",
+    part: "背",
+    intensity: 60,
+    note: "背部训练 · 感受动作发力",
+    tone: "blue",
+    time: "19:30–20:30",
+    cardioTime: null,
+    mode: "力量训练 · 背部",
+    sleep: "良好",
+    warmup: "筋膜松解 · 胸椎灵活 · 前锯肌激活",
+    calories: "300–420",
+    actions: [
+      { name: "悬垂控腿", sets: "2组 25s×自重 · 间歇60s" },
+      { name: "助力引体", sets: "10×50kg；10×50kg；15×60kg；15×60kg" },
+      { name: "窄距坐姿划船", sets: "15×20kg；15×20kg；15×15kg；15×15kg" },
+      { name: "反手窄距下拉", sets: "15×20kg；15×20kg；15×25kg；15×25kg" },
+      { name: "TRX划船", sets: "4组 15×自重" },
+      { name: "悬垂抬腿", sets: "3组 15×自重" },
+    ],
+    cardio: null,
+    strengthCalories: null,
+    cardioCalories: null,
+  }
 ];
 const composition = [
   ["体重", "69.5", "kg", "正常"],
@@ -270,7 +318,7 @@ function ExerciseIcon({ name }: { name: string }) {
 
 export default function Home() {
   const [tab, setTab] = useState<"overview" | "training" | "body">("overview");
-  const [selectedDay, setSelectedDay] = useState(16);
+  const [selectedDay, setSelectedDay] = useState(20);
   const selectedSession = sessions.find(
     (s) => Number(s.date.slice(3)) === selectedDay,
   );
@@ -512,7 +560,7 @@ export default function Home() {
                 <Ring value={33} label="背" color="#6caef0" />
                 <Ring value={33} label="下肢" color="#9bcdf5" />
               </div>
-              <p className="caption">14天完成6次训练，每个大肌群各2次。</p>
+              <p className="caption">18天完成8次训练。</p>
             </article>
             <article className="panel focus">
               <div className="panel-title">
@@ -553,7 +601,7 @@ export default function Home() {
               <div>
                 <p>TRAINING CALENDAR</p>
                 <b>2026 · 08</b>
-                <span>6次</span>
+                <span>8次</span>
               </div>
               <div className="calendar-legend">
                 <span>
@@ -714,9 +762,9 @@ export default function Home() {
           <section className="section-head timeline-head">
             <div>
               <p>TRAINING LOG</p>
-              <h2>六次训练时间线</h2>
+              <h2>八次训练时间线</h2>
             </div>
-            <span>2026.08.03—08.16</span>
+            <span>2026.08.03—08.20</span>
           </section>
           <div className="session-list">
             {sessions.map((s, i) => (
