@@ -280,7 +280,7 @@ export default function Home() {
         <div className="brand">
           <span className="mark">Y</span>
           <div>
-            <b>个人健身档案test</b>
+            <b>个人健身档案</b>
             <small>FITNESS LOG · 2026</small>
           </div>
         </div>
