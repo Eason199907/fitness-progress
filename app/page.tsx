@@ -340,22 +340,47 @@ export default function Home() {
   const [selectedDay, setSelectedDay] = useState(25);
 
   useEffect(() => {
-    fetch("/data/sessions.json", { cache: "no-store" })
-      .then((r) => {
+    const loadSessions = async () => {
+      try {
+        const r = await fetch(`/data/sessions.json?v=${Date.now()}`, {
+          cache: "no-store",
+          headers: {
+            "Cache-Control": "no-cache",
+            Pragma: "no-cache",
+          },
+        });
         if (!r.ok) throw new Error(`Failed to load sessions: ${r.status}`);
-        return r.json();
-      })
-      .then((data: Session[]) => {
+        const data = (await r.json()) as Session[];
         setSessions(data);
         if (data.length) {
           const latestDay = Number(data[data.length - 1].date.slice(3));
           setSelectedDay(latestDay);
         }
-      })
-      .catch((err) => {
+      } catch (err) {
         console.error(err);
         setSessions(legacySessions as Session[]);
-      });
+      }
+    };
+
+    loadSessions();
+
+    const refreshWhenVisible = () => {
+      if (document.visibilityState === "visible") {
+        loadSessions();
+      }
+    };
+
+    const refreshOnPageShow = () => {
+      loadSessions();
+    };
+
+    document.addEventListener("visibilitychange", refreshWhenVisible);
+    window.addEventListener("pageshow", refreshOnPageShow);
+
+    return () => {
+      document.removeEventListener("visibilitychange", refreshWhenVisible);
+      window.removeEventListener("pageshow", refreshOnPageShow);
+    };
   }, []);
 
   const selectedSession = sessions.find(
