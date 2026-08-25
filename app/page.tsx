@@ -1,7 +1,25 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
-const sessions = [
+type Session = {
+  date: string;
+  part: string;
+  intensity: number | null;
+  note: string;
+  tone: string;
+  time: string;
+  cardioTime: string | null;
+  mode: string;
+  sleep: string;
+  warmup: string;
+  calories: string | null;
+  actions: { name: string; sets: string }[];
+  cardio: string | null;
+  strengthCalories: string | null;
+  cardioCalories: string | null;
+};
+
+const legacySessions = [
   {
     date: "08.03",
     part: "胸",
@@ -318,10 +336,41 @@ function ExerciseIcon({ name }: { name: string }) {
 
 export default function Home() {
   const [tab, setTab] = useState<"overview" | "training" | "body">("overview");
-  const [selectedDay, setSelectedDay] = useState(20);
+  const [sessions, setSessions] = useState<Session[]>([]);
+  const [selectedDay, setSelectedDay] = useState(25);
+
+  useEffect(() => {
+    fetch("/data/sessions.json", { cache: "no-store" })
+      .then((r) => {
+        if (!r.ok) throw new Error(`Failed to load sessions: ${r.status}`);
+        return r.json();
+      })
+      .then((data: Session[]) => {
+        setSessions(data);
+        if (data.length) {
+          const latestDay = Number(data[data.length - 1].date.slice(3));
+          setSelectedDay(latestDay);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        setSessions(legacySessions as Session[]);
+      });
+  }, []);
+
   const selectedSession = sessions.find(
     (s) => Number(s.date.slice(3)) === selectedDay,
   );
+
+  const sessionCount = sessions.length;
+  const firstDate = sessions[0]?.date ?? "—";
+  const lastDate = sessions[sessionCount - 1]?.date ?? "—";
+  const daysSpan = useMemo(() => {
+    if (!sessionCount) return 0;
+    const first = Number(firstDate.slice(3));
+    const last = Number(lastDate.slice(3));
+    return last - first + 1;
+  }, [firstDate, lastDate, sessionCount]);
   return (
     <main>
       <header className="topbar">
@@ -560,7 +609,7 @@ export default function Home() {
                 <Ring value={33} label="背" color="#6caef0" />
                 <Ring value={33} label="下肢" color="#9bcdf5" />
               </div>
-              <p className="caption">18天完成8次训练。</p>
+              <p className="caption">{daysSpan}天完成{sessionCount}次训练。</p>
             </article>
             <article className="panel focus">
               <div className="panel-title">
@@ -601,7 +650,7 @@ export default function Home() {
               <div>
                 <p>TRAINING CALENDAR</p>
                 <b>2026 · 08</b>
-                <span>8次</span>
+                <span>{sessionCount}次</span>
               </div>
               <div className="calendar-legend">
                 <span>
@@ -762,9 +811,9 @@ export default function Home() {
           <section className="section-head timeline-head">
             <div>
               <p>TRAINING LOG</p>
-              <h2>八次训练时间线</h2>
+              <h2>{sessionCount}次训练时间线</h2>
             </div>
-            <span>2026.08.03—08.20</span>
+            <span>2026.{firstDate}—{lastDate}</span>
           </section>
           <div className="session-list">
             {sessions.map((s, i) => (
