@@ -1,0 +1,340 @@
+[
+  {
+    "date": "08.03",
+    "part": "胸",
+    "intensity": 70,
+    "note": "胸部基础容量",
+    "tone": "coral",
+    "time": "08:00–09:00",
+    "cardioTime": null,
+    "mode": "力量训练 · 胸部",
+    "sleep": "一般",
+    "warmup": "筋膜松解 · 胸椎灵活 · 肩袖热身",
+    "calories": "280–380",
+    "actions": [
+      {
+        "name": "杠铃平板卧推",
+        "sets": "12×20kg；3组 12×30kg"
+      },
+      {
+        "name": "哑铃上斜卧推",
+        "sets": "2组 12×10kg；12×7.5kg"
+      },
+      {
+        "name": "助力双杠臂屈伸",
+        "sets": "10×助力50kg；2组 10×助力55kg"
+      },
+      {
+        "name": "坐姿推胸",
+        "sets": "3组 12×20kg"
+      }
+    ],
+    "cardio": null,
+    "strengthCalories": null,
+    "cardioCalories": null
+  },
+  {
+    "date": "08.04",
+    "part": "背",
+    "intensity": 70,
+    "note": "垂直拉与水平拉",
+    "tone": "blue",
+    "time": "11:00–12:00",
+    "cardioTime": null,
+    "mode": "力量训练 · 背部",
+    "sleep": "一般",
+    "warmup": "筋膜松解 · 胸椎灵活",
+    "calories": "300–410",
+    "actions": [
+      {
+        "name": "助力引体向上",
+        "sets": "4组 10×助力45kg"
+      },
+      {
+        "name": "仰卧上斜划船",
+        "sets": "4组 10×自重"
+      },
+      {
+        "name": "对握下拉",
+        "sets": "4组 10×25kg"
+      },
+      {
+        "name": "对握坐姿划船",
+        "sets": "4组 12×20kg"
+      }
+    ],
+    "cardio": null,
+    "strengthCalories": null,
+    "cardioCalories": null
+  },
+  {
+    "date": "08.06",
+    "part": "腿",
+    "intensity": 85,
+    "note": "深蹲主导训练",
+    "tone": "lime",
+    "time": "10:00–11:00",
+    "cardioTime": null,
+    "mode": "力量训练 · 腿部",
+    "sleep": "一般",
+    "warmup": "筋膜松解 · 动态伸展",
+    "calories": "390–500",
+    "actions": [
+      {
+        "name": "泽奇深蹲",
+        "sets": "12×20kg；3组 12×40kg"
+      },
+      {
+        "name": "保加利亚分腿蹲",
+        "sets": "12×自重；3组 12×10kg"
+      },
+      {
+        "name": "哈克深蹲",
+        "sets": "3组 10×40kg"
+      }
+    ],
+    "cardio": null,
+    "strengthCalories": null,
+    "cardioCalories": null
+  },
+  {
+    "date": "08.10",
+    "part": "胸",
+    "intensity": 70,
+    "note": "胸部力量＋独立有氧",
+    "tone": "coral",
+    "time": "09:00–10:00",
+    "cardioTime": "10:00–10:30",
+    "mode": "力量训练＋有氧训练",
+    "sleep": "良好 · 6小时",
+    "warmup": "筋膜松解 · 胸椎灵活 · 肩袖热身 · 前锯肌激活 · 呼吸",
+    "calories": "590–750",
+    "actions": [
+      {
+        "name": "杠铃平板卧推",
+        "sets": "4组 12×20kg"
+      },
+      {
+        "name": "哑铃上斜卧推",
+        "sets": "4组 12×7.5kg"
+      },
+      {
+        "name": "杠铃下斜卧推",
+        "sets": "4组 12×20kg"
+      },
+      {
+        "name": "坐姿推胸",
+        "sets": "4组 12×25kg"
+      },
+      {
+        "name": "蝴蝶机夹胸",
+        "sets": "4组 12×20kg"
+      }
+    ],
+    "cardio": "爬楼机 · 30分钟",
+    "strengthCalories": "300–410",
+    "cardioCalories": "290–340"
+  },
+  {
+    "date": "08.14",
+    "part": "背",
+    "intensity": 80,
+    "note": "引体容量明显提升",
+    "tone": "blue",
+    "time": "21:00–22:00",
+    "cardioTime": null,
+    "mode": "力量训练 · 背部",
+    "sleep": "较差",
+    "warmup": "筋膜松解 · 胸椎灵活 · 前锯肌激活 · 靠墙天使",
+    "calories": "330–440",
+    "actions": [
+      {
+        "name": "助力引体向上",
+        "sets": "12 / 12 / 10 / 10×助力45kg"
+      },
+      {
+        "name": "绳索对握下拉",
+        "sets": "4组 12×50kg"
+      },
+      {
+        "name": "绳索对握划船",
+        "sets": "12×50kg；3组 12×40kg"
+      }
+    ],
+    "cardio": null,
+    "strengthCalories": null,
+    "cardioCalories": null
+  },
+  {
+    "date": "08.16",
+    "part": "腿",
+    "intensity": 80,
+    "note": "完整臀腿后侧＋核心",
+    "tone": "lime",
+    "time": "14:00–16:00",
+    "cardioTime": null,
+    "mode": "力量训练 · 腿部＋核心",
+    "sleep": "良好",
+    "warmup": "筋膜松解 · 核心激活 · 动态伸展",
+    "calories": "700–900",
+    "actions": [
+      {
+        "name": "泽奇深蹲",
+        "sets": "3组 12×20kg；12×50kg"
+      },
+      {
+        "name": "犀牛深蹲",
+        "sets": "4组 12×40kg"
+      },
+      {
+        "name": "哈克深蹲",
+        "sets": "4组 12×30kg"
+      },
+      {
+        "name": "杠铃罗马尼亚硬拉",
+        "sets": "4组 12×40kg"
+      },
+      {
+        "name": "坐姿腿弯举",
+        "sets": "4组 15×25kg"
+      },
+      {
+        "name": "坐姿腿屈伸",
+        "sets": "4组 15×25kg"
+      },
+      {
+        "name": "负重卷腹",
+        "sets": "4组 15×10kg"
+      }
+    ],
+    "cardio": null,
+    "strengthCalories": null,
+    "cardioCalories": null
+  },
+  {
+    "date": "08.19",
+    "part": "胸/肩/腹",
+    "intensity": 75,
+    "note": "胸肩腹力量训练＋爬坡有氧",
+    "tone": "coral",
+    "time": "19:45–20:45",
+    "cardioTime": "20:45–21:15",
+    "mode": "力量训练 · 胸肩腹＋有氧训练",
+    "sleep": "良好",
+    "warmup": "胸椎灵活 · 肩袖热身 · 前锯肌激活",
+    "calories": "560–700",
+    "actions": [
+      {
+        "name": "史密斯站姿推肩",
+        "sets": "3组 15×空杆"
+      },
+      {
+        "name": "蝴蝶机坐姿推肩",
+        "sets": "3组 15×20kg"
+      },
+      {
+        "name": "蝴蝶机上斜卧推",
+        "sets": "4组 12×25kg"
+      },
+      {
+        "name": "固定分推平板卧推",
+        "sets": "4组 10×5kg"
+      },
+      {
+        "name": "固定下斜夹胸",
+        "sets": "3组 12×20kg"
+      },
+      {
+        "name": "固定卷腹",
+        "sets": "4组 12×空载"
+      }
+    ],
+    "cardio": "爬坡有氧 · 30分钟 · 平均心率120 bpm",
+    "strengthCalories": "280–390",
+    "cardioCalories": "280–310"
+  },
+  {
+    "date": "08.20",
+    "part": "背",
+    "intensity": 60,
+    "note": "背部训练 · 感受动作发力",
+    "tone": "blue",
+    "time": "19:30–20:30",
+    "cardioTime": null,
+    "mode": "力量训练 · 背部",
+    "sleep": "良好",
+    "warmup": "筋膜松解 · 胸椎灵活 · 前锯肌激活",
+    "calories": "300–420",
+    "actions": [
+      {
+        "name": "悬垂控腿",
+        "sets": "2组 25s×自重 · 间歇60s"
+      },
+      {
+        "name": "助力引体",
+        "sets": "10×50kg；10×50kg；15×60kg；15×60kg"
+      },
+      {
+        "name": "窄距坐姿划船",
+        "sets": "15×20kg；15×20kg；15×15kg；15×15kg"
+      },
+      {
+        "name": "反手窄距下拉",
+        "sets": "15×20kg；15×20kg；15×25kg；15×25kg"
+      },
+      {
+        "name": "TRX划船",
+        "sets": "4组 15×自重"
+      },
+      {
+        "name": "悬垂抬腿",
+        "sets": "3组 15×自重"
+      }
+    ],
+    "cardio": null,
+    "strengthCalories": null,
+    "cardioCalories": null
+  },
+  {
+    "date": "08.25",
+    "part": "腿",
+    "intensity": 75,
+    "note": "腿部力量训练 · 西安自主训练",
+    "tone": "lime",
+    "time": "13:30–15:00",
+    "cardioTime": null,
+    "mode": "力量训练 · 腿部",
+    "sleep": "良好",
+    "warmup": "前锯肌激活 · 腿部拉伸激活",
+    "calories": null,
+    "actions": [
+      {
+        "name": "泽奇深蹲",
+        "sets": "3组 12×30kg；1组 12×50kg"
+      },
+      {
+        "name": "保加利亚分腿蹲",
+        "sets": "4组 12×10kg"
+      },
+      {
+        "name": "杠铃罗马尼亚硬拉",
+        "sets": "2组 12×40kg；1组 12×20kg；1组 12×30kg"
+      },
+      {
+        "name": "哈克深蹲",
+        "sets": "2组 12×40kg；1组 12×50kg；1组 12×65kg"
+      },
+      {
+        "name": "坐姿腿弯举",
+        "sets": "4组 15×30kg"
+      },
+      {
+        "name": "站姿腿屈伸",
+        "sets": "4组 15×0kg"
+      }
+    ],
+    "cardio": null,
+    "strengthCalories": null,
+    "cardioCalories": null
+  }
+]
