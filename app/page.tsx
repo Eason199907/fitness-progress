@@ -244,6 +244,34 @@ const sessions = [
     strengthCalories: null,
     cardioCalories: null,
   },
+  {
+    date: "08.28",
+    part: "腿",
+    groups: "腿部力量＋腿部拉伸",
+    intensity: 95,
+    note: "高强度腿部训练 · 很累",
+    tone: "lime",
+    time: "18:00–19:00",
+    cardioTime: null,
+    mode: "力量训练 · 腿部",
+    sleep: "良好",
+    diet: "已进食",
+    warmup: "慢跑10分钟 · 筋膜松解 · 核心激活 · 动态伸展",
+    stretchSession: "腿部拉伸",
+    calories: "480–620",
+    actions: [
+      { name: "弓步交叉跳", sets: "1组 12次 · 神经激活" },
+      { name: "泽奇深蹲", sets: "4组 10×50kg · 间歇90秒" },
+      { name: "杠铃罗马尼亚硬拉", sets: "4组 12×40kg · 间歇90秒" },
+      { name: "弓步行走", sets: "3组 12×12.5kg×2 · 间歇120秒" },
+      { name: "俯卧腿弯举", sets: "12 / 15 / 15 / 15×空杠 · 间歇60秒" },
+      { name: "杠铃臀推", sets: "12×50kg；3组 12×70kg · 间歇90秒" },
+      { name: "哈克深蹲", sets: "4组 12×40kg · 间歇90秒" },
+    ],
+    cardio: null,
+    strengthCalories: null,
+    cardioCalories: null,
+  },
 ];
 
 function calendarTone(session: (typeof sessions)[number] | undefined) {
@@ -513,6 +541,12 @@ export default function Home() {
                   <span>热身内容</span>
                   <b>{selectedSession.warmup}</b>
                 </div>
+                {selectedSession.diet && (
+                  <div className="warmup-block">
+                    <span>饮食情况</span>
+                    <b>{selectedSession.diet}</b>
+                  </div>
+                )}
                 {selectedSession.stretchSession && (
                   <div className="stretch-block">
                     <span>拉伸课</span>
@@ -636,7 +670,7 @@ export default function Home() {
                 <Ring value={33} label="背" color="#6caef0" />
                 <Ring value={33} label="下肢" color="#9bcdf5" />
               </div>
-              <p className="caption">23天完成9次训练，胸部训练略多于其他大肌群。</p>
+              <p className="caption">26天完成11次训练，力量训练覆盖胸、背与下肢。</p>
             </article>
             <article className="panel focus">
               <div className="panel-title">
@@ -677,7 +711,7 @@ export default function Home() {
               <div>
                 <p>TRAINING CALENDAR</p>
                 <b>2026 · 08</b>
-                <span>9次</span>
+                <span>11次</span>
               </div>
               <div className="calendar-legend">
                 <span>
@@ -800,6 +834,12 @@ export default function Home() {
                       <span>热身内容</span>
                       <b>{selectedSession.warmup}</b>
                     </div>
+                    {selectedSession.diet && (
+                      <div className="warmup-block">
+                        <span>饮食情况</span>
+                        <b>{selectedSession.diet}</b>
+                      </div>
+                    )}
                     <div className="exercise-table">
                       {selectedSession.actions.map((a) => (
                         <div key={a.name}>
@@ -847,9 +887,9 @@ export default function Home() {
           <section className="section-head timeline-head">
             <div>
               <p>TRAINING LOG</p>
-              <h2>六次训练时间线</h2>
+              <h2>十一次训练时间线</h2>
             </div>
-            <span>2026.08.03—08.25</span>
+            <span>2026.08.03—08.28</span>
           </section>
           <div className="session-list">
             {sessions.map((s, i) => (
