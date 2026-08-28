@@ -617,7 +617,10 @@ body {
   background: #35a992;
 }
 .dot.cardio {
-  background: #8ae8bd;
+  background: #a6ffd1;
+}
+.dot.stretch {
+  background: #a879e8;
 }
 .calendar-layout {
   display: grid;
@@ -678,11 +681,32 @@ body {
 .calendar-grid button.has-workout.lime {
   background: #269c87;
 }
+.calendar-grid button.has-workout.split-chest-back {
+  background: linear-gradient(135deg, #e97965 0 50%, #5276ca 50% 100%);
+}
+.calendar-grid button.has-workout.stretch-session {
+  box-shadow: 0 0 0 1px #e0c2ff, 0 0 12px 4px #a879e8ee, 0 0 22px 5px #a879e888;
+}
+.calendar-grid button.has-workout.cardio-session {
+  box-shadow: 0 0 0 1px #e1ffef, 0 0 12px 4px #a6ffd1ee, 0 0 22px 5px #6dffc099;
+}
+.calendar-grid button.has-workout.cardio-session.stretch-session {
+  box-shadow: 0 0 0 1px #e0c2ff, 0 0 10px 3px #a879e8ee, 0 0 0 4px #e1ffef, 0 0 16px 5px #a6ffd1ee, 0 0 26px 6px #6dffc099;
+}
 .calendar-grid button.selected {
   box-shadow:
     0 0 0 2px #fff,
     0 0 0 4px #183f6d;
   transform: translateY(-1px);
+}
+.calendar-grid button.selected.stretch-session {
+  box-shadow: 0 0 0 2px #e0c2ff, 0 0 12px 4px #a879e8ee, 0 0 24px 6px #a879e888, 0 0 0 6px #183f6d;
+}
+.calendar-grid button.selected.cardio-session {
+  box-shadow: 0 0 0 2px #e1ffef, 0 0 12px 4px #a6ffd1ee, 0 0 24px 6px #6dffc099, 0 0 0 6px #183f6d;
+}
+.calendar-grid button.selected.cardio-session.stretch-session {
+  box-shadow: 0 0 0 2px #e0c2ff, 0 0 10px 3px #a879e8ee, 0 0 0 5px #e1ffef, 0 0 18px 5px #a6ffd1ee, 0 0 28px 7px #6dffc099, 0 0 0 9px #183f6d;
 }
 .workout-marks {
   position: absolute;
@@ -722,6 +746,9 @@ body {
 .day-detail.blue {
   background: linear-gradient(145deg, #173763, #315fa8);
 }
+.day-detail.split-chest-back {
+  background: linear-gradient(120deg, #873b35 0%, #d76552 48%, #315fa8 52%, #173763 100%);
+}
 .day-detail.lime {
   background: linear-gradient(145deg, #12584f, #239985);
   color: #fff;
@@ -739,6 +766,32 @@ body {
   gap: 13px;
   padding-bottom: 11px;
   border-bottom: 1px solid #ffffff30;
+}
+.extra-session {
+  display: block;
+  margin-top: 5px;
+  color: #ffffffcc;
+  font-size: 11px;
+}
+.stretch-block {
+  margin: 10px 0;
+  padding: 9px 11px;
+  border: 1px solid #a879e8aa;
+  border-radius: 10px;
+  background: #a879e822;
+}
+.stretch-block span,
+.stretch-block b {
+  display: block;
+}
+.stretch-block span {
+  color: #e0caff;
+  font-size: 10px;
+}
+.stretch-block b {
+  margin-top: 3px;
+  color: #fff;
+  font-size: 12px;
 }
 .day-number {
   border-right: 1px solid #ffffff45;

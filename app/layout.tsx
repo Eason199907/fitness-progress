@@ -4,6 +4,9 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "个人健身档案",
   description: "训练记录与身体成分进度可视化",
+  other: {
+    "codex-preview": "development",
+  },
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",

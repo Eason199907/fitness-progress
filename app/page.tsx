@@ -1,25 +1,7 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
+import { useState } from "react";
 
-type Session = {
-  date: string;
-  part: string;
-  intensity: number | null;
-  note: string;
-  tone: string;
-  time: string;
-  cardioTime: string | null;
-  mode: string;
-  sleep: string;
-  warmup: string;
-  calories: string | null;
-  actions: { name: string; sets: string }[];
-  cardio: string | null;
-  strengthCalories: string | null;
-  cardioCalories: string | null;
-};
-
-const legacySessions = [
+const sessions = [
   {
     date: "08.03",
     part: "胸",
@@ -93,6 +75,7 @@ const legacySessions = [
     tone: "coral",
     time: "09:00–10:00",
     cardioTime: "10:00–10:30",
+    hideCardioMark: true,
     mode: "力量训练＋有氧训练",
     sleep: "良好 · 6小时",
     warmup: "筋膜松解 · 胸椎灵活 · 肩袖热身 · 前锯肌激活 · 呼吸",
@@ -156,33 +139,37 @@ const legacySessions = [
   },
   {
     date: "08.19",
-    part: "胸/肩/腹",
+    part: "胸",
+    groups: "胸部＋肩部＋腹部",
     intensity: 75,
-    note: "胸肩腹力量训练＋爬坡有氧",
+    note: "胸肩推动＋腹部稳定",
     tone: "coral",
     time: "19:45–20:45",
-    cardioTime: "20:45–21:15",
-    mode: "力量训练 · 胸肩腹＋有氧训练",
+    mode: "力量训练＋爬坡有氧 · 胸肩腹",
     sleep: "良好",
     warmup: "胸椎灵活 · 肩袖热身 · 前锯肌激活",
     calories: "560–700",
     actions: [
-      { name: "史密斯站姿推肩", sets: "3组 15×空杆" },
+      { name: "史密斯站姿推肩", sets: "3组 15×空" },
       { name: "蝴蝶机坐姿推肩", sets: "3组 15×20kg" },
       { name: "蝴蝶机上斜卧推", sets: "4组 12×25kg" },
       { name: "固定分推平板卧推", sets: "4组 10×5kg" },
       { name: "固定下斜夹胸", sets: "3组 12×20kg" },
-      { name: "固定卷腹", sets: "4组 12×空载" },
+      { name: "固定卷腹", sets: "4组 12×空" },
     ],
-    cardio: "爬坡有氧 · 30分钟 · 平均心率120 bpm",
+    cardio: "爬坡机 · 30分钟",
+    cardioTime: "20:45–21:15",
+    hideCardioMark: true,
+    cardioHeartRate: 120,
     strengthCalories: "280–390",
     cardioCalories: "280–310",
   },
   {
     date: "08.20",
     part: "背",
+    groups: "背部",
     intensity: 60,
-    note: "背部训练 · 感受动作发力",
+    note: "感受动作发力",
     tone: "blue",
     time: "19:30–20:30",
     cardioTime: null,
@@ -191,7 +178,7 @@ const legacySessions = [
     warmup: "筋膜松解 · 胸椎灵活 · 前锯肌激活",
     calories: "300–420",
     actions: [
-      { name: "悬垂控腿", sets: "2组 25s×自重 · 间歇60s" },
+      { name: "悬垂控腿", sets: "2组 25秒×自重 · 间歇60秒" },
       { name: "助力引体", sets: "10×50kg；10×50kg；15×60kg；15×60kg" },
       { name: "窄距坐姿划船", sets: "15×20kg；15×20kg；15×15kg；15×15kg" },
       { name: "反手窄距下拉", sets: "15×20kg；15×20kg；15×25kg；15×25kg" },
@@ -201,8 +188,69 @@ const legacySessions = [
     cardio: null,
     strengthCalories: null,
     cardioCalories: null,
-  }
+  },
+  {
+    date: "08.25",
+    part: "腿",
+    groups: "腿部",
+    intensity: 75,
+    note: "西安健身房 · 自主训练",
+    tone: "lime",
+    time: "13:30–15:00",
+    cardioTime: null,
+    mode: "力量训练 · 腿部",
+    sleep: "良好",
+    warmup: "前锯肌激活 · 腿部拉伸激活",
+    calories: "650–850",
+    actions: [
+      { name: "泽奇深蹲", sets: "3组 12×30kg；1组 12×50kg" },
+      { name: "保加利亚分腿蹲", sets: "4组 12×10kg" },
+      { name: "杠铃罗马尼亚硬拉", sets: "2组 12×40kg；1组 12×20kg；1组 12×30kg" },
+      { name: "哈克深蹲", sets: "2组 12×40kg；1组 12×50kg；1组 12×65kg" },
+      { name: "坐姿腿弯举", sets: "4组 15×30kg" },
+      { name: "站姿腿屈伸", sets: "4组 15×0kg" },
+    ],
+    cardio: null,
+    strengthCalories: null,
+    cardioCalories: null,
+  },
+  {
+    date: "08.27",
+    part: "胸＋背",
+    groups: "胸部＋背部＋腹部",
+    intensity: 80,
+    note: "胸背复合训练＋核心",
+    tone: "split-chest-back",
+    time: "15:00–16:00",
+    cardioTime: null,
+    mode: "力量训练 · 胸背腹",
+    sleep: "良好",
+    warmup: "筋膜松解 · 前锯肌激活 · 胸椎旋转",
+    extraSession: "14:00–15:00 拉伸课 · 上半身筋膜松解",
+    stretchSession: "14:00–15:00 拉伸课 · 上半身筋膜松解",
+    calories: "480–620",
+    actions: [
+      { name: "杠铃平板卧推", sets: "4组 8×40kg" },
+      { name: "固定俯身划船", sets: "4组 8×20kg" },
+      { name: "蝴蝶机上斜推胸", sets: "4组 12×25kg" },
+      { name: "背大下拉", sets: "4组 12×40kg" },
+      { name: "固定下斜卧推", sets: "4组 12×45kg" },
+      { name: "龙门架坐姿划船", sets: "4组 12×13kg" },
+      { name: "蝴蝶机下拉", sets: "4组 12×30kg" },
+      { name: "坐姿水平夹胸", sets: "4组 12×15kg" },
+      { name: "固定卷腹", sets: "4组 15×空" },
+    ],
+    cardio: null,
+    strengthCalories: null,
+    cardioCalories: null,
+  },
 ];
+
+function calendarTone(session: (typeof sessions)[number] | undefined) {
+  if (!session) return "";
+  const tone = session.tone === "split-chest-back" ? "split-chest-back" : session.tone;
+  return `${tone}${session.cardio ? " cardio-session" : ""}${session.stretchSession ? " stretch-session" : ""}`;
+}
 const composition = [
   ["体重", "69.5", "kg", "正常"],
   ["BMI", "21.9", "", "正常"],
@@ -336,66 +384,10 @@ function ExerciseIcon({ name }: { name: string }) {
 
 export default function Home() {
   const [tab, setTab] = useState<"overview" | "training" | "body">("overview");
-  const [sessions, setSessions] = useState<Session[]>([]);
-  const [selectedDay, setSelectedDay] = useState(25);
-
-  useEffect(() => {
-    const loadSessions = async () => {
-      try {
-        const r = await fetch(`/data/sessions.json?v=${Date.now()}`, {
-          cache: "no-store",
-          headers: {
-            "Cache-Control": "no-cache",
-            Pragma: "no-cache",
-          },
-        });
-        if (!r.ok) throw new Error(`Failed to load sessions: ${r.status}`);
-        const data = (await r.json()) as Session[];
-        setSessions(data);
-        if (data.length) {
-          const latestDay = Number(data[data.length - 1].date.slice(3));
-          setSelectedDay(latestDay);
-        }
-      } catch (err) {
-        console.error(err);
-        setSessions(legacySessions as Session[]);
-      }
-    };
-
-    loadSessions();
-
-    const refreshWhenVisible = () => {
-      if (document.visibilityState === "visible") {
-        loadSessions();
-      }
-    };
-
-    const refreshOnPageShow = () => {
-      loadSessions();
-    };
-
-    document.addEventListener("visibilitychange", refreshWhenVisible);
-    window.addEventListener("pageshow", refreshOnPageShow);
-
-    return () => {
-      document.removeEventListener("visibilitychange", refreshWhenVisible);
-      window.removeEventListener("pageshow", refreshOnPageShow);
-    };
-  }, []);
-
+  const [selectedDay, setSelectedDay] = useState(16);
   const selectedSession = sessions.find(
     (s) => Number(s.date.slice(3)) === selectedDay,
   );
-
-  const sessionCount = sessions.length;
-  const firstDate = sessions[0]?.date ?? "—";
-  const lastDate = sessions[sessionCount - 1]?.date ?? "—";
-  const daysSpan = useMemo(() => {
-    if (!sessionCount) return 0;
-    const first = Number(firstDate.slice(3));
-    const last = Number(lastDate.slice(3));
-    return last - first + 1;
-  }, [firstDate, lastDate, sessionCount]);
   return (
     <main>
       <header className="topbar">
@@ -435,7 +427,7 @@ export default function Home() {
                 return day ? (
                   <button
                     key={day}
-                    className={`${workout ? `has-workout ${workout.tone}` : ""} ${selectedDay === day ? "selected" : ""}`}
+                    className={`${workout ? `has-workout ${calendarTone(workout)}` : ""} ${selectedDay === day ? "selected" : ""}`}
                     onClick={() => setSelectedDay(day)}
                     aria-label={`8月${day}日${workout ? `${workout.part}部训练，查看训练细节` : "无训练记录"}`}
                   >
@@ -443,7 +435,7 @@ export default function Home() {
                     {workout && (
                       <span className="workout-marks">
                         <i />
-                        {workout.cardio && <i className="cardio-dot" />}
+                        {workout.cardio && !workout.hideCardioMark && <i className="cardio-dot" />}
                       </span>
                     )}
                   </button>
@@ -465,8 +457,8 @@ export default function Home() {
                     <p>训练详情</p>
                     <div className="detail-title-row">
                       <h3>
-                        {selectedSession.part}部力量
-                        {selectedSession.cardio ? "＋有氧" : ""}
+                        {selectedSession.groups || `${selectedSession.part}部力量`}
+                        {selectedSession.cardio && selectedSession.part !== "有氧" ? "＋有氧" : ""}
                       </h3>
                       <b className="detail-time">
                         {selectedSession.time}
@@ -475,6 +467,7 @@ export default function Home() {
                         )}
                       </b>
                     </div>
+                    {selectedSession.extraSession && <small className="extra-session">{selectedSession.extraSession}</small>}
                   </>
                 ) : (
                   <>
@@ -520,6 +513,12 @@ export default function Home() {
                   <span>热身内容</span>
                   <b>{selectedSession.warmup}</b>
                 </div>
+                {selectedSession.stretchSession && (
+                  <div className="stretch-block">
+                    <span>拉伸课</span>
+                    <b>{selectedSession.stretchSession}</b>
+                  </div>
+                )}
                 <div className="exercise-table">
                   {selectedSession.actions.map((a) => (
                     <div key={a.name}>
@@ -535,6 +534,9 @@ export default function Home() {
                     <b>
                       {selectedSession.cardio}
                       <small>{selectedSession.cardioTime}</small>
+                      {selectedSession.cardioHeartRate && (
+                        <small>平均心率 {selectedSession.cardioHeartRate} 次/分钟</small>
+                      )}
                     </b>
                   </div>
                 )}
@@ -634,7 +636,7 @@ export default function Home() {
                 <Ring value={33} label="背" color="#6caef0" />
                 <Ring value={33} label="下肢" color="#9bcdf5" />
               </div>
-              <p className="caption">{daysSpan}天完成{sessionCount}次训练。</p>
+              <p className="caption">23天完成9次训练，胸部训练略多于其他大肌群。</p>
             </article>
             <article className="panel focus">
               <div className="panel-title">
@@ -675,7 +677,7 @@ export default function Home() {
               <div>
                 <p>TRAINING CALENDAR</p>
                 <b>2026 · 08</b>
-                <span>{sessionCount}次</span>
+                <span>9次</span>
               </div>
               <div className="calendar-legend">
                 <span>
@@ -687,9 +689,11 @@ export default function Home() {
                 <span>
                   <i className="dot legs" />腿
                 </span>
+                        <span>
+                  <i className="dot cardio" />有氧
+                </span>
                 <span>
-                  <i className="dot cardio" />
-                  有氧
+                  <i className="dot stretch" />拉伸
                 </span>
               </div>
             </div>
@@ -709,7 +713,7 @@ export default function Home() {
                     return day ? (
                       <button
                         key={day}
-                        className={`${workout ? `has-workout ${workout.tone}` : ""} ${selectedDay === day ? "selected" : ""}`}
+                        className={`${workout ? `has-workout ${calendarTone(workout)}` : ""} ${selectedDay === day ? "selected" : ""}`}
                         onClick={() => setSelectedDay(day)}
                         aria-label={`8月${day}日${workout ? `${workout.part}部训练${workout.cardio ? "及有氧训练" : ""}` : "无训练记录"}`}
                       >
@@ -717,7 +721,7 @@ export default function Home() {
                         {workout && (
                           <span className="workout-marks">
                             <i />
-                            {workout.cardio && <i className="cardio-dot" />}
+                            {workout.cardio && !workout.hideCardioMark && <i className="cardio-dot" />}
                           </span>
                         )}
                       </button>
@@ -740,8 +744,8 @@ export default function Home() {
                         <p>训练详情</p>
                         <div className="detail-title-row">
                           <h3>
-                            {selectedSession.part}部力量
-                            {selectedSession.cardio ? "＋有氧" : ""}
+                            {selectedSession.groups || `${selectedSession.part}部力量`}
+                            {selectedSession.cardio && selectedSession.part !== "有氧" ? "＋有氧" : ""}
                           </h3>
                           <b className="detail-time">
                             {selectedSession.time}
@@ -750,6 +754,7 @@ export default function Home() {
                             )}
                           </b>
                         </div>
+                        {selectedSession.extraSession && <small className="extra-session">{selectedSession.extraSession}</small>}
                       </>
                     ) : (
                       <>
@@ -791,7 +796,7 @@ export default function Home() {
                         </i>
                       </span>
                     </div>
-                    <div className="warmup-block">
+                        <div className="warmup-block">
                       <span>热身内容</span>
                       <b>{selectedSession.warmup}</b>
                     </div>
@@ -804,6 +809,12 @@ export default function Home() {
                         </div>
                       ))}
                     </div>
+                    {selectedSession.stretchSession && (
+                      <div className="stretch-block">
+                        <span>拉伸课</span>
+                        <b>{selectedSession.stretchSession}</b>
+                      </div>
+                    )}
                     {selectedSession.cardio && (
                       <div className="cardio-block">
                         <span>独立有氧</span>
@@ -836,9 +847,9 @@ export default function Home() {
           <section className="section-head timeline-head">
             <div>
               <p>TRAINING LOG</p>
-              <h2>{sessionCount}次训练时间线</h2>
+              <h2>六次训练时间线</h2>
             </div>
-            <span>2026.{firstDate}—{lastDate}</span>
+            <span>2026.08.03—08.25</span>
           </section>
           <div className="session-list">
             {sessions.map((s, i) => (
