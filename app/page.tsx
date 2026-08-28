@@ -549,7 +549,7 @@ export default function Home() {
                 )}
                 {selectedSession.stretchSession && (
                   <div className="stretch-block">
-                    <span>拉伸课</span>
+                    <span>{selectedSession.stretchSession.includes("拉伸课") ? "拉伸课" : "拉伸记录"}</span>
                     <b>{selectedSession.stretchSession}</b>
                   </div>
                 )}
@@ -851,7 +851,7 @@ export default function Home() {
                     </div>
                     {selectedSession.stretchSession && (
                       <div className="stretch-block">
-                        <span>拉伸课</span>
+                        <span>{selectedSession.stretchSession.includes("拉伸课") ? "拉伸课" : "拉伸记录"}</span>
                         <b>{selectedSession.stretchSession}</b>
                       </div>
                     )}
