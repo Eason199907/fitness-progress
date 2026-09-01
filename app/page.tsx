@@ -272,7 +272,66 @@ const sessions = [
     strengthCalories: null,
     cardioCalories: null,
   },
+  {
+    date: "09.01",
+    part: "背",
+    intensity: 75,
+    note: "背部拉力训练 · 感受适中",
+    feeling: "适中",
+    tone: "blue",
+    time: "13:00–14:00",
+    cardioTime: null,
+    mode: "力量训练 · 背部",
+    sleep: "良好",
+    warmup: "筋膜松解 · 胸椎灵活 · 肩袖热身 · 悬垂控腹30秒×2组",
+    calories: null,
+    actions: [
+      { name: "助力引体", sets: "4组 15次×助力65kg · 间歇90秒" },
+      { name: "仰卧正手划船", sets: "4组 12次×自重 · 间歇90秒" },
+      { name: "蹲起辅助引体", sets: "4组 8次 · 重量未记录 · 间歇90秒" },
+      { name: "单臂哑铃划船", sets: "3组 15次×10kg · 间歇60秒" },
+      { name: "直臂下压", sets: "3组 15次×20kg；1组 15次×15kg · 间歇60秒" },
+    ],
+    cardio: null,
+    strengthCalories: null,
+    cardioCalories: null,
+  },
 ];
+
+const trainingYear = 2026;
+const trainingMonths = [...new Set(sessions.map((s) => Number(s.date.slice(0, 2))))].sort((a, b) => a - b);
+const latestMonth = trainingMonths[trainingMonths.length - 1];
+
+function sessionsForMonth(month: number) {
+  return sessions.filter((s) => Number(s.date.slice(0, 2)) === month);
+}
+
+function latestDayForMonth(month: number) {
+  return Math.max(1, ...sessionsForMonth(month).map((s) => Number(s.date.slice(3))));
+}
+
+function findSession(month: number, day: number) {
+  const date = `${String(month).padStart(2, "0")}.${String(day).padStart(2, "0")}`;
+  return sessions.find((s) => s.date === date);
+}
+
+function calendarDaysForMonth(month: number) {
+  const start = new Date(Date.UTC(trainingYear, month - 1, 1)).getUTCDay();
+  const count = new Date(Date.UTC(trainingYear, month, 0)).getUTCDate();
+  return Array.from({ length: Math.ceil((start + count) / 7) * 7 }, (_, i) =>
+    i >= start && i < start + count ? i - start + 1 : null,
+  );
+}
+
+function MonthPicker({ month, onChange }: { month: number; onChange: (month: number) => void }) {
+  return (
+    <select className="month-picker" aria-label="选择训练月份" value={month} onChange={(event) => onChange(Number(event.target.value))}>
+      {trainingMonths.map((value) => (
+        <option key={value} value={value}>{trainingYear}年{value}月</option>
+      ))}
+    </select>
+  );
+}
 
 function calendarTone(session: (typeof sessions)[number] | undefined) {
   if (!session) return "";
@@ -412,10 +471,17 @@ function ExerciseIcon({ name }: { name: string }) {
 
 export default function Home() {
   const [tab, setTab] = useState<"overview" | "training" | "body">("overview");
-  const [selectedDay, setSelectedDay] = useState(16);
-  const selectedSession = sessions.find(
-    (s) => Number(s.date.slice(3)) === selectedDay,
-  );
+  const [selectedMonth, setSelectedMonth] = useState(latestMonth);
+  const [selectedDay, setSelectedDay] = useState(latestDayForMonth(latestMonth));
+  const selectedSession = findSession(selectedMonth, selectedDay);
+  const monthSessions = sessionsForMonth(selectedMonth);
+  const calendarDays = calendarDaysForMonth(selectedMonth);
+  const monthAbbreviation = new Date(Date.UTC(trainingYear, selectedMonth - 1, 1))
+    .toLocaleString("en-US", { month: "short", timeZone: "UTC" }).toUpperCase();
+  function changeMonth(month: number) {
+    setSelectedMonth(month);
+    setSelectedDay(latestDayForMonth(month));
+  }
   return (
     <main>
       <header className="topbar">
@@ -435,9 +501,12 @@ export default function Home() {
         <div className="home-calendar-title">
           <div>
             <p>TRAINING CALENDAR</p>
-            <h2>8月训练月历</h2>
+            <h2>{selectedMonth}月训练月历</h2>
           </div>
-          <span>点击日期查看当天训练细节</span>
+          <div className="calendar-controls">
+            <MonthPicker month={selectedMonth} onChange={changeMonth} />
+            <span>点击日期查看当天训练细节</span>
+          </div>
         </div>
         <div className="home-calendar-body">
           <div className="mini-calendar">
@@ -447,17 +516,14 @@ export default function Home() {
               ))}
             </div>
             <div className="calendar-grid">
-              {Array.from({ length: 37 }, (_, i) => {
-                const day = i < 6 ? null : i - 5;
-                const workout = day
-                  ? sessions.find((s) => Number(s.date.slice(3)) === day)
-                  : undefined;
+              {calendarDays.map((day, i) => {
+                const workout = day ? findSession(selectedMonth, day) : undefined;
                 return day ? (
                   <button
                     key={day}
                     className={`${workout ? `has-workout ${calendarTone(workout)}` : ""} ${selectedDay === day ? "selected" : ""}`}
                     onClick={() => setSelectedDay(day)}
-                    aria-label={`8月${day}日${workout ? `${workout.part}部训练，查看训练细节` : "无训练记录"}`}
+                    aria-label={`${selectedMonth}月${day}日${workout ? `${workout.part}部训练，查看训练细节` : "无训练记录"}`}
                   >
                     <span>{day}</span>
                     {workout && (
@@ -476,7 +542,7 @@ export default function Home() {
           <div className={`day-detail ${selectedSession?.tone || "rest"}`}>
             <div className="detail-heading">
               <div className="day-number">
-                <small>AUG</small>
+                <small>{monthAbbreviation}</small>
                 <strong>{String(selectedDay).padStart(2, "0")}</strong>
               </div>
               <div>
@@ -541,6 +607,12 @@ export default function Home() {
                   <span>热身内容</span>
                   <b>{selectedSession.warmup}</b>
                 </div>
+                {selectedSession.feeling && (
+                  <div className="warmup-block">
+                    <span>训练感受</span>
+                    <b>{selectedSession.feeling}</b>
+                  </div>
+                )}
                 {selectedSession.diet && (
                   <div className="warmup-block">
                     <span>饮食情况</span>
@@ -576,7 +648,7 @@ export default function Home() {
                 )}
                 <div className="calorie-row">
                   <span>估算消耗</span>
-                  <b>{selectedSession.calories} kcal</b>
+                  <b>{selectedSession.calories ? `${selectedSession.calories} kcal` : "未估算"}</b>
                 </div>
                 {selectedSession.cardio && (
                   <div className="energy-breakdown">
@@ -584,9 +656,9 @@ export default function Home() {
                     {selectedSession.cardioCalories} kcal
                   </div>
                 )}
-                <p className="calorie-note">
+                {selectedSession.calories && <p className="calorie-note">
                   消耗按69.5kg体重、训练类型及已有时间记录估算，仅作趋势参考。
-                </p>
+                </p>}
               </>
             ) : (
               <p className="rest-note">保持恢复，为下一次训练做好准备。</p>
@@ -670,7 +742,7 @@ export default function Home() {
                 <Ring value={33} label="背" color="#6caef0" />
                 <Ring value={33} label="下肢" color="#9bcdf5" />
               </div>
-              <p className="caption">26天完成11次训练，力量训练覆盖胸、背与下肢。</p>
+              <p className="caption">累计完成{sessions.length}次训练，力量训练覆盖胸、背与下肢。</p>
             </article>
             <article className="panel focus">
               <div className="panel-title">
@@ -710,8 +782,8 @@ export default function Home() {
             <div className="calendar-top">
               <div>
                 <p>TRAINING CALENDAR</p>
-                <b>2026 · 08</b>
-                <span>11次</span>
+                <MonthPicker month={selectedMonth} onChange={changeMonth} />
+                <span>本月{monthSessions.length}次</span>
               </div>
               <div className="calendar-legend">
                 <span>
@@ -739,17 +811,14 @@ export default function Home() {
                   ))}
                 </div>
                 <div className="calendar-grid">
-                  {Array.from({ length: 37 }, (_, i) => {
-                    const day = i < 6 ? null : i - 5;
-                    const workout = day
-                      ? sessions.find((s) => Number(s.date.slice(3)) === day)
-                      : undefined;
+                  {calendarDays.map((day, i) => {
+                    const workout = day ? findSession(selectedMonth, day) : undefined;
                     return day ? (
                       <button
                         key={day}
                         className={`${workout ? `has-workout ${calendarTone(workout)}` : ""} ${selectedDay === day ? "selected" : ""}`}
                         onClick={() => setSelectedDay(day)}
-                        aria-label={`8月${day}日${workout ? `${workout.part}部训练${workout.cardio ? "及有氧训练" : ""}` : "无训练记录"}`}
+                        aria-label={`${selectedMonth}月${day}日${workout ? `${workout.part}部训练${workout.cardio ? "及有氧训练" : ""}` : "无训练记录"}`}
                       >
                         <span>{day}</span>
                         {workout && (
@@ -769,7 +838,7 @@ export default function Home() {
               <div className={`day-detail ${selectedSession?.tone || "rest"}`}>
                 <div className="detail-heading">
                   <div className="day-number">
-                    <small>AUG</small>
+                    <small>{monthAbbreviation}</small>
                     <strong>{String(selectedDay).padStart(2, "0")}</strong>
                   </div>
                   <div>
@@ -834,6 +903,12 @@ export default function Home() {
                       <span>热身内容</span>
                       <b>{selectedSession.warmup}</b>
                     </div>
+                    {selectedSession.feeling && (
+                      <div className="warmup-block">
+                        <span>训练感受</span>
+                        <b>{selectedSession.feeling}</b>
+                      </div>
+                    )}
                     {selectedSession.diet && (
                       <div className="warmup-block">
                         <span>饮食情况</span>
@@ -866,7 +941,7 @@ export default function Home() {
                     )}
                     <div className="calorie-row">
                       <span>估算消耗</span>
-                      <b>{selectedSession.calories} kcal</b>
+                      <b>{selectedSession.calories ? `${selectedSession.calories} kcal` : "未估算"}</b>
                     </div>
                     {selectedSession.cardio && (
                       <div className="energy-breakdown">
@@ -874,9 +949,9 @@ export default function Home() {
                         {selectedSession.cardioCalories} kcal
                       </div>
                     )}
-                    <p className="calorie-note">
+                    {selectedSession.calories && <p className="calorie-note">
                       消耗按69.5kg体重、训练类型及已有时间记录估算，仅作趋势参考。
-                    </p>
+                    </p>}
                   </>
                 ) : (
                   <p className="rest-note">保持恢复，为下一次训练做好准备。</p>
@@ -887,9 +962,9 @@ export default function Home() {
           <section className="section-head timeline-head">
             <div>
               <p>TRAINING LOG</p>
-              <h2>十一次训练时间线</h2>
+              <h2>{sessions.length}次训练时间线</h2>
             </div>
-            <span>2026.08.03—08.28</span>
+            <span>{trainingYear}.{sessions[0].date}—{sessions[sessions.length - 1].date}</span>
           </section>
           <div className="session-list">
             {sessions.map((s, i) => (
@@ -915,7 +990,7 @@ export default function Home() {
                     </strong>
                   )}
                 </div>
-                <span className="session-no">0{i + 1}</span>
+                <span className="session-no">{String(i + 1).padStart(2, "0")}</span>
               </article>
             ))}
           </div>
