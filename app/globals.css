@@ -505,26 +505,140 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  max-width: 100%;
   gap: 6px;
 }
 .calendar-controls > span {
   font-size: 10px;
   color: var(--muted);
 }
-.month-picker {
+.month-navigation {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  width: 352px;
   max-width: 100%;
-  min-height: 40px;
-  padding: 7px 10px;
-  font: 600 14px system-ui;
-  color: #19375c;
+}
+.month-stepper {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 44px;
+  align-items: center;
   background: #f4f8fc;
   border: 1px solid #c6d7e9;
-  border-radius: 8px;
+  border-radius: 12px;
+}
+.month-navigation button,
+.month-title,
+.month-year-controls select {
+  min-height: 44px;
+  font: 600 14px system-ui;
+  color: #19375c;
   cursor: pointer;
 }
-.month-picker:focus-visible {
+.month-navigation button {
+  border: 0;
+  background: transparent;
+  padding: 0 10px;
+}
+.month-arrow {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  border-radius: 10px;
+}
+.month-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  white-space: nowrap;
+  list-style: none;
+  border-radius: 8px;
+}
+.month-title::-webkit-details-marker {
+  display: none;
+}
+.calendar-chevron {
+  flex-shrink: 0;
+}
+.calendar-chevron.left {
+  transform: rotate(180deg);
+}
+.calendar-chevron.down {
+  transform: rotate(90deg);
+  width: 14px;
+}
+.month-disclosure[open] > .month-title .calendar-chevron {
+  transform: rotate(-90deg);
+}
+.month-navigation .month-today {
+  background: #edf4fc;
+  border: 1px solid #c6d7e9;
+  border-radius: 10px;
+  white-space: nowrap;
+  font-size: 12px;
+}
+.month-navigation button:hover:not(:disabled),
+.month-title:hover {
+  background: #e3edf8;
+}
+.month-navigation button:disabled {
+  cursor: default;
+  opacity: 0.35;
+}
+.month-navigation button:focus-visible,
+.month-title:focus-visible,
+.month-year-controls select:focus-visible {
   outline: 2px solid #347fc3;
   outline-offset: 3px;
+}
+.month-popover {
+  position: absolute;
+  z-index: 5;
+  top: calc(100% + 8px);
+  inset-inline: 0;
+  padding: 12px;
+  background: #fff;
+  border: 1px solid #c6d7e9;
+  border-radius: 14px;
+  box-shadow: 0 12px 36px #19375c26;
+}
+.month-year-controls {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 44px;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.month-year-controls select {
+  width: 100%;
+  padding: 0 8px;
+  background: #f4f8fc;
+  border: 1px solid #d7e3f0;
+  border-radius: 8px;
+}
+.month-options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+.month-options button {
+  border-radius: 8px;
+}
+.month-options button[aria-pressed="true"],
+.month-options button[aria-pressed="true"]:hover {
+  color: #fff;
+  background: #19375c;
+}
+@media (max-width: 360px) {
+  .month-navigation {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .month-navigation .month-today {
+    justify-self: end;
+  }
 }
 .home-calendar-body {
   display: grid;
@@ -600,7 +714,8 @@ body {
 .calendar-top > div:first-child {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
+  align-items: center;
+  max-width: 100%;
   gap: 10px;
 }
 .calendar-top p {
@@ -613,7 +728,7 @@ body {
 .calendar-top b {
   font: 600 16px system-ui;
 }
-.calendar-top > div:first-child span {
+.calendar-top > div:first-child > span {
   font-size: 9px;
   color: var(--muted);
   background: #edf3f9;
@@ -1300,6 +1415,10 @@ footer {
   }
   .home-calendar-title h2 {
     font-size: 24px;
+  }
+  .calendar-controls {
+    width: 100%;
+    align-items: flex-start;
   }
   .home-calendar-title > span {
     max-width: 105px;
