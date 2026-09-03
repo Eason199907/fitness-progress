@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const sessions = [
   {
@@ -325,34 +325,133 @@ const trainingYear = 2026;
 const trainingMonths = [...new Set(sessions.map((s) => Number(s.date.slice(0, 2))))].sort((a, b) => a - b);
 const latestMonth = trainingMonths[trainingMonths.length - 1];
 
-function sessionsForMonth(month: number) {
-  return sessions.filter((s) => Number(s.date.slice(0, 2)) === month);
+function sessionsForMonth(month: number, year = trainingYear) {
+  return year === trainingYear ? sessions.filter((s) => Number(s.date.slice(0, 2)) === month) : [];
 }
 
-function latestDayForMonth(month: number) {
-  return Math.max(1, ...sessionsForMonth(month).map((s) => Number(s.date.slice(3))));
+function latestDayForMonth(month: number, year = trainingYear) {
+  return Math.max(1, ...sessionsForMonth(month, year).map((s) => Number(s.date.slice(3))));
 }
 
-function findSession(month: number, day: number) {
+function findSession(month: number, day: number, year = trainingYear) {
+  if (year !== trainingYear) return undefined;
   const date = `${String(month).padStart(2, "0")}.${String(day).padStart(2, "0")}`;
   return sessions.find((s) => s.date === date);
 }
 
-function calendarDaysForMonth(month: number) {
-  const start = new Date(Date.UTC(trainingYear, month - 1, 1)).getUTCDay();
-  const count = new Date(Date.UTC(trainingYear, month, 0)).getUTCDate();
+function calendarDaysForMonth(month: number, year = trainingYear) {
+  const start = new Date(Date.UTC(year, month - 1, 1)).getUTCDay();
+  const count = new Date(Date.UTC(year, month, 0)).getUTCDate();
   return Array.from({ length: Math.ceil((start + count) / 7) * 7 }, (_, i) =>
     i >= start && i < start + count ? i - start + 1 : null,
   );
 }
 
-function MonthPicker({ month, onChange }: { month: number; onChange: (month: number) => void }) {
+const firstCalendarYear = 1900;
+const lastCalendarYear = 2100;
+
+function shiftMonth(year: number, month: number, offset: number) {
+  const date = new Date(Date.UTC(year, month - 1 + offset, 1));
+  return { year: date.getUTCFullYear(), month: date.getUTCMonth() + 1 };
+}
+
+function currentCalendarMonth(now = new Date()) {
+  return { year: now.getFullYear(), month: now.getMonth() + 1 };
+}
+
+function CalendarChevron({ direction }: { direction: "left" | "right" | "down" }) {
   return (
-    <select className="month-picker" aria-label="选择训练月份" value={month} onChange={(event) => onChange(Number(event.target.value))}>
-      {trainingMonths.map((value) => (
-        <option key={value} value={value}>{trainingYear}年{value}月</option>
-      ))}
-    </select>
+    <svg className={`calendar-chevron ${direction}`} viewBox="0 0 20 20" width="18" height="18" fill="none" aria-hidden="true">
+      <path d="m7.5 4.5 5.5 5.5-5.5 5.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function MonthNavigator({ year, month, onChange }: { year: number; month: number; onChange: (year: number, month: number) => void }) {
+  const [pickerYear, setPickerYear] = useState(year);
+  const container = useRef<HTMLDivElement>(null);
+  const disclosure = useRef<HTMLDetailsElement>(null);
+  const title = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (disclosure.current) disclosure.current.open = false;
+    function closeOutside(event: PointerEvent) {
+      if (event.target instanceof Node && !container.current?.contains(event.target) && disclosure.current) {
+        disclosure.current.open = false;
+      }
+    }
+    document.addEventListener("pointerdown", closeOutside);
+    return () => document.removeEventListener("pointerdown", closeOutside);
+  }, [year, month]);
+
+  function selectMonth(nextYear: number, nextMonth: number) {
+    if (disclosure.current) disclosure.current.open = false;
+    onChange(nextYear, nextMonth);
+    title.current?.focus();
+  }
+
+  function moveMonth(offset: number) {
+    const next = shiftMonth(year, month, offset);
+    onChange(next.year, next.month);
+  }
+
+  return (
+    <div
+      className="month-navigation"
+      ref={container}
+      onBlur={(event) => {
+        if (event.relatedTarget && !event.currentTarget.contains(event.relatedTarget as Node) && disclosure.current) disclosure.current.open = false;
+      }}
+      onKeyDown={(event) => {
+        if (event.key === "Escape" && disclosure.current?.open) {
+          event.preventDefault();
+          disclosure.current.open = false;
+          title.current?.focus();
+        }
+      }}
+    >
+      <div className="month-stepper">
+        <button type="button" className="month-arrow" aria-label="上个月" disabled={year === firstCalendarYear && month === 1} onClick={() => moveMonth(-1)}>
+          <CalendarChevron direction="left" />
+        </button>
+        <details className="month-disclosure" ref={disclosure}>
+          <summary className="month-title" ref={title} aria-label={`${year}年${month}月，选择年月`} onClick={() => setPickerYear(year)}>
+            <span aria-live="polite" aria-atomic="true">{year}年{month}月</span>
+            <CalendarChevron direction="down" />
+          </summary>
+          <div className="month-popover" role="group" aria-label="选择年月">
+            <div className="month-year-controls">
+              <button type="button" className="month-arrow" aria-label="上一年" disabled={pickerYear === firstCalendarYear} onClick={() => setPickerYear(pickerYear - 1)}>
+                <CalendarChevron direction="left" />
+              </button>
+              <select aria-label="选择年份" value={pickerYear} onChange={(event) => setPickerYear(Number(event.target.value))}>
+                {Array.from({ length: lastCalendarYear - firstCalendarYear + 1 }, (_, index) => firstCalendarYear + index).map((value) => (
+                  <option key={value} value={value}>{value}年</option>
+                ))}
+              </select>
+              <button type="button" className="month-arrow" aria-label="下一年" disabled={pickerYear === lastCalendarYear} onClick={() => setPickerYear(pickerYear + 1)}>
+                <CalendarChevron direction="right" />
+              </button>
+            </div>
+            <div className="month-options">
+              {Array.from({ length: 12 }, (_, index) => index + 1).map((value) => (
+                <button key={value} type="button" aria-label={`${pickerYear}年${value}月`} aria-pressed={pickerYear === year && value === month} onClick={() => selectMonth(pickerYear, value)}>
+                  {value}月
+                </button>
+              ))}
+            </div>
+          </div>
+        </details>
+        <button type="button" className="month-arrow" aria-label="下个月" disabled={year === lastCalendarYear && month === 12} onClick={() => moveMonth(1)}>
+          <CalendarChevron direction="right" />
+        </button>
+      </div>
+      <button type="button" className="month-today" onClick={() => {
+        const current = currentCalendarMonth();
+        if (disclosure.current) disclosure.current.open = false;
+        onChange(current.year, current.month);
+      }}>回到本月</button>
+    </div>
   );
 }
 
@@ -494,16 +593,18 @@ function ExerciseIcon({ name }: { name: string }) {
 
 export default function Home() {
   const [tab, setTab] = useState<"overview" | "training" | "body">("overview");
+  const [selectedYear, setSelectedYear] = useState(trainingYear);
   const [selectedMonth, setSelectedMonth] = useState(latestMonth);
   const [selectedDay, setSelectedDay] = useState(latestDayForMonth(latestMonth));
-  const selectedSession = findSession(selectedMonth, selectedDay);
-  const monthSessions = sessionsForMonth(selectedMonth);
-  const calendarDays = calendarDaysForMonth(selectedMonth);
-  const monthAbbreviation = new Date(Date.UTC(trainingYear, selectedMonth - 1, 1))
+  const selectedSession = findSession(selectedMonth, selectedDay, selectedYear);
+  const monthSessions = sessionsForMonth(selectedMonth, selectedYear);
+  const calendarDays = calendarDaysForMonth(selectedMonth, selectedYear);
+  const monthAbbreviation = new Date(Date.UTC(selectedYear, selectedMonth - 1, 1))
     .toLocaleString("en-US", { month: "short", timeZone: "UTC" }).toUpperCase();
-  function changeMonth(month: number) {
+  function changeMonth(year: number, month: number) {
+    setSelectedYear(year);
     setSelectedMonth(month);
-    setSelectedDay(latestDayForMonth(month));
+    setSelectedDay(latestDayForMonth(month, year));
   }
   return (
     <main>
@@ -527,8 +628,8 @@ export default function Home() {
             <h2>{selectedMonth}月训练月历</h2>
           </div>
           <div className="calendar-controls">
-            <MonthPicker month={selectedMonth} onChange={changeMonth} />
-            <span>点击日期查看当天训练细节</span>
+            <MonthNavigator year={selectedYear} month={selectedMonth} onChange={changeMonth} />
+            <span>点月份标题选年月 · 点日期看训练</span>
           </div>
         </div>
         <div className="home-calendar-body">
@@ -540,13 +641,13 @@ export default function Home() {
             </div>
             <div className="calendar-grid">
               {calendarDays.map((day, i) => {
-                const workout = day ? findSession(selectedMonth, day) : undefined;
+                const workout = day ? findSession(selectedMonth, day, selectedYear) : undefined;
                 return day ? (
                   <button
                     key={day}
                     className={`${workout ? `has-workout ${calendarTone(workout)}` : ""} ${selectedDay === day ? "selected" : ""}`}
                     onClick={() => setSelectedDay(day)}
-                    aria-label={`${selectedMonth}月${day}日${workout ? `${workout.part}部训练，查看训练细节` : "无训练记录"}`}
+                    aria-label={`${selectedYear}年${selectedMonth}月${day}日${workout ? `${workout.part}部训练，查看训练细节` : "无训练记录"}`}
                   >
                     <span>{day}</span>
                     {workout && (
@@ -805,8 +906,8 @@ export default function Home() {
             <div className="calendar-top">
               <div>
                 <p>TRAINING CALENDAR</p>
-                <MonthPicker month={selectedMonth} onChange={changeMonth} />
-                <span>本月{monthSessions.length}次</span>
+                <MonthNavigator year={selectedYear} month={selectedMonth} onChange={changeMonth} />
+                <span>所选月{monthSessions.length}次</span>
               </div>
               <div className="calendar-legend">
                 <span>
@@ -835,13 +936,13 @@ export default function Home() {
                 </div>
                 <div className="calendar-grid">
                   {calendarDays.map((day, i) => {
-                    const workout = day ? findSession(selectedMonth, day) : undefined;
+                    const workout = day ? findSession(selectedMonth, day, selectedYear) : undefined;
                     return day ? (
                       <button
                         key={day}
                         className={`${workout ? `has-workout ${calendarTone(workout)}` : ""} ${selectedDay === day ? "selected" : ""}`}
                         onClick={() => setSelectedDay(day)}
-                        aria-label={`${selectedMonth}月${day}日${workout ? `${workout.part}部训练${workout.cardio ? "及有氧训练" : ""}` : "无训练记录"}`}
+                        aria-label={`${selectedYear}年${selectedMonth}月${day}日${workout ? `${workout.part}部训练${workout.cardio ? "及有氧训练" : ""}` : "无训练记录"}`}
                       >
                         <span>{day}</span>
                         {workout && (
