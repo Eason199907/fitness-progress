@@ -296,6 +296,29 @@ const sessions = [
     strengthCalories: null,
     cardioCalories: null,
   },
+  {
+    date: "09.03",
+    part: "胸",
+    intensity: 60,
+    note: "胸部推举与夹胸训练",
+    tone: "coral",
+    time: "13:00–14:00",
+    cardioTime: null,
+    mode: "力量训练 · 胸部",
+    sleep: "良好",
+    warmup: "胸椎灵活 · 前锯肌激活 · 肩袖热身",
+    calories: null,
+    actions: [
+      { name: "蝴蝶机夹胸", sets: "4组 12次×30kg · 间歇60秒" },
+      { name: "哑铃上斜卧推", sets: "4组 15次×7.5kg · 间歇60秒" },
+      { name: "哑铃平板卧推", sets: "1组 12次×10kg；3组 15次×10kg · 间歇90秒" },
+      { name: "双杠臂屈伸", sets: "2组 12次×60kg · 间歇90秒" },
+      { name: "单臂蝴蝶机夹胸", sets: "3组 15次×10kg · 间歇60秒" },
+    ],
+    cardio: null,
+    strengthCalories: null,
+    cardioCalories: null,
+  },
 ];
 
 const trainingYear = 2026;
