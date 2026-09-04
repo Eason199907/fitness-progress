@@ -486,15 +486,42 @@ function calendarTone(session: (typeof sessions)[number] | undefined) {
   const tone = session.tone === "split-chest-back" ? "split-chest-back" : session.tone;
   return `${tone}${session.cardio ? " cardio-session" : ""}${session.stretchSession ? " stretch-session" : ""}`;
 }
+const bodyAssessment = {
+  date: "2026.09.04",
+  time: "14:47",
+  comparedWith: "2026.08.16",
+  height: 178,
+  age: 27,
+  bodyScore: 69,
+  bodyScoreChange: 0,
+  postureScore: 83,
+  postureScoreChange: -2,
+  summary: "整体变化不大：体重下降0.2kg，肌肉量下降0.1kg，体脂率保持22.8%。",
+  postureNote: "设备提示可能存在头前引、头侧歪、右圆肩、骨盆前移和身体倾斜。",
+};
 const composition = [
-  ["体重", "69.5", "kg", "正常"],
-  ["BMI", "21.9", "", "正常"],
-  ["体脂率", "22.8", "%", "略高"],
-  ["肌肉量", "50.5", "kg", "正常偏低"],
-  ["骨骼肌", "31.3", "kg", "正常"],
-  ["去脂体重", "53.6", "kg", "正常"],
-  ["内脏脂肪", "5", "级", "正常"],
-  ["基础代谢", "1571", "kcal", "正常"],
+  { name: "体重", value: "69.3", unit: "kg", status: "正常", change: "↓0.2" },
+  { name: "BMI", value: "21.9", unit: "", status: "正常", change: "持平" },
+  { name: "体脂率", value: "22.8", unit: "%", status: "略高", change: "持平" },
+  { name: "体脂肪", value: "15.8", unit: "kg", status: "正常", change: "↓0.1" },
+  { name: "肌肉量", value: "50.4", unit: "kg", status: "正常偏低", change: "↓0.1" },
+  { name: "骨骼肌", value: "31.2", unit: "kg", status: "正常", change: "↓0.1" },
+  { name: "去脂体重", value: "53.5", unit: "kg", status: "正常", change: "↓0.1" },
+  { name: "总水分", value: "38.6", unit: "kg", status: "偏低", change: "↓0.2" },
+  { name: "细胞内液", value: "24.2", unit: "kg", status: "正常下限", change: "持平" },
+  { name: "细胞外液", value: "14.4", unit: "kg", status: "偏低", change: "↓0.2" },
+  { name: "无机盐", value: "3.9", unit: "kg", status: "正常", change: "持平" },
+  { name: "蛋白质", value: "11.0", unit: "kg", status: "正常", change: "持平" },
+  { name: "内脏脂肪", value: "5.0", unit: "级", status: "正常", change: "持平" },
+  { name: "基础代谢", value: "1567.5", unit: "kcal/d", status: "正常", change: "↓3.1" },
+  { name: "腰臀比", value: "0.88", unit: "", status: "正常", change: "持平" },
+];
+const segmentalFat = [
+  ["右上肢", "0.8"],
+  ["左上肢", "0.9"],
+  ["躯干", "8.3"],
+  ["右下肢", "2.4"],
+  ["左下肢", "2.4"],
 ];
 const circumference: [[string, number]] | [string, number][] = [
   ["胸围", 99.7],
@@ -843,7 +870,7 @@ export default function Home() {
               <p>AT A GLANCE</p>
               <h2>当前身体状态</h2>
             </div>
-            <span>首次体测基线</span>
+            <span>最新体测 · 09.04</span>
           </section>
           <div className="metric-grid">
             <article className="metric feature">
@@ -859,14 +886,14 @@ export default function Home() {
             <article className="metric">
               <span>骨骼肌</span>
               <strong>
-                31.3<small>kg</small>
+                31.2<small>kg</small>
               </strong>
               <p className="good">正常 · 有提升空间</p>
             </article>
             <article className="metric">
               <span>肌肉量</span>
               <strong>
-                50.5<small>kg</small>
+                50.4<small>kg</small>
               </strong>
               <p>处于设备正常范围下端</p>
             </article>
@@ -1160,27 +1187,65 @@ export default function Home() {
               <p>BODY COMPOSITION</p>
               <h2>身体成分与围度</h2>
             </div>
-            <span>Visbody · 08.16</span>
+            <span>Visbody · 09.04 14:47</span>
+          </section>
+          <section className="body-test-summary" aria-label="本次体测概览">
+            <article>
+              <span>体成分评分</span>
+              <strong>{bodyAssessment.bodyScore}</strong>
+              <p>与上次持平</p>
+            </article>
+            <article>
+              <span>体态评分</span>
+              <strong>{bodyAssessment.postureScore}</strong>
+              <p>较上次 ↓2</p>
+            </article>
+            <article className="body-test-note">
+              <span>对比 {bodyAssessment.comparedWith.slice(5)}</span>
+              <h3>整体稳定</h3>
+              <p>{bodyAssessment.summary}</p>
+              <small>{bodyAssessment.postureNote}</small>
+            </article>
           </section>
           <div className="composition-grid">
-            {composition.map(([n, v, u, s]) => (
-              <article key={n}>
-                <span>{n}</span>
+            {composition.map((item) => (
+              <article key={item.name}>
+                <span>{item.name}</span>
                 <strong>
-                  {v}
-                  <small>{u}</small>
+                  {item.value}
+                  <small>{item.unit}</small>
                 </strong>
-                <p className={s === "略高" ? "warn" : ""}>{s}</p>
+                <div className="composition-meta">
+                  <p className={item.status.includes("高") || item.status.includes("低") ? "warn" : ""}>{item.status}</p>
+                  <em>{item.change}</em>
+                </div>
               </article>
             ))}
           </div>
+          <section className="panel segmental-fat">
+            <div className="panel-title">
+              <div>
+                <p>SEGMENTAL FAT</p>
+                <h3>本次节段脂肪</h3>
+              </div>
+              <b>单位 kg</b>
+            </div>
+            <div className="segmental-fat-grid">
+              {segmentalFat.map(([name, value]) => (
+                <div key={name}>
+                  <span>{name}</span>
+                  <strong>{value}</strong>
+                </div>
+              ))}
+            </div>
+          </section>
           <section className="panel circumference">
             <div className="panel-title">
               <div>
                 <p>CIRCUMFERENCE</p>
-                <h3>围度基线</h3>
+                <h3>08.16 围度基线</h3>
               </div>
-              <b>单位 cm</b>
+              <b>本次未复测 · cm</b>
             </div>
             <div className="bar-list">
               {circumference.map(([n, v]) => (
@@ -1196,9 +1261,9 @@ export default function Home() {
           </section>
           <div className="symmetry">
             <div>
-              <p>节段肌肉</p>
-              <h3>下肢左右均为 8.4 kg</h3>
-              <span>左右平衡</span>
+              <p>本次节段脂肪</p>
+              <h3>下肢左右均为 2.4 kg</h3>
+              <span>左右一致</span>
             </div>
             <div>
               <p>待复测确认</p>
