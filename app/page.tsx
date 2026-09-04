@@ -319,6 +319,32 @@ const sessions = [
     strengthCalories: null,
     cardioCalories: null,
   },
+  {
+    date: "09.04",
+    part: "腿",
+    groups: "腿部力量＋腿部拉伸",
+    intensity: 80,
+    note: "下肢深蹲与髋伸训练 · 比较累",
+    feeling: "比较累",
+    tone: "lime",
+    time: "15:00–16:00",
+    cardioTime: null,
+    mode: "力量训练 · 下肢",
+    sleep: "良好",
+    warmup: "筋膜松解 · 动态伸展 · 毛毛虫",
+    extraSession: "14:00–15:00 拉伸课 · 腿部筋膜刀",
+    stretchSession: "14:00–15:00 拉伸课 · 腿部筋膜刀",
+    calories: null,
+    actions: [
+      { name: "泽奇深蹲", sets: "4组 12次×50kg · 间歇90秒" },
+      { name: "杠铃罗马尼亚硬拉", sets: "4组 8次×50kg · 间歇90秒" },
+      { name: "保加利亚箭步", sets: "3组 10次×7.5kg×2 · 间歇90秒" },
+      { name: "哈克深蹲", sets: "2组 10次×80kg · 间歇120秒 · 第二组做完头痛，呼吸需调整" },
+    ],
+    cardio: null,
+    strengthCalories: null,
+    cardioCalories: null,
+  },
 ];
 
 const trainingYear = 2026;
