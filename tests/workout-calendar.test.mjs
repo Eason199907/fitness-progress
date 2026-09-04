@@ -13,7 +13,7 @@ const compiled = ts.transpileModule(source, {
 }).outputText;
 const context = { require: createRequire(import.meta.url), exports: {} };
 vm.runInNewContext(compiled + `
-  globalThis.workouts = { sessions, latestMonth, sessionsForMonth, latestDayForMonth, findSession, calendarDaysForMonth, calendarTone, shiftMonth, currentCalendarMonth, MonthNavigator };
+  globalThis.workouts = { sessions, latestMonth, sessionsForMonth, latestDayForMonth, findSession, calendarDaysForMonth, calendarTone, shiftMonth, currentCalendarMonth, MonthNavigator, bodyAssessment, composition, segmentalFat };
 `, context);
 const data = context.workouts;
 
@@ -142,4 +142,25 @@ test("navigator disables year boundary arrows and leaves only the selected month
   assert.match(last, /aria-label="下一年" disabled=""/);
   assert.equal((first.match(/aria-pressed="true"/g) || []).length, 1);
   assert.equal((last.match(/aria-pressed="true"/g) || []).length, 1);
+});
+
+test("September 4 body assessment keeps the complete Visbody snapshot and comparison", () => {
+  assert.equal(data.bodyAssessment.date, "2026.09.04");
+  assert.equal(data.bodyAssessment.time, "14:47");
+  assert.equal(data.bodyAssessment.comparedWith, "2026.08.16");
+  assert.equal(data.bodyAssessment.bodyScore, 69);
+  assert.equal(data.bodyAssessment.postureScore, 83);
+  assert.equal(data.composition.length, 15);
+  const metric = (name) => data.composition.find((item) => item.name === name);
+  assert.equal(metric("体重").value, "69.3");
+  assert.equal(metric("体重").change, "↓0.2");
+  assert.equal(metric("体脂率").value, "22.8");
+  assert.equal(metric("肌肉量").value, "50.4");
+  assert.equal(metric("骨骼肌").value, "31.2");
+  assert.equal(metric("总水分").value, "38.6");
+  assert.equal(metric("基础代谢").value, "1567.5");
+  assert.equal(metric("腰臀比").value, "0.88");
+  assert.deepEqual(Array.from(data.segmentalFat, (item) => Array.from(item)), [
+    ["右上肢", "0.8"], ["左上肢", "0.9"], ["躯干", "8.3"], ["右下肢", "2.4"], ["左下肢", "2.4"],
+  ]);
 });
