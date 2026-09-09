@@ -345,6 +345,33 @@ const sessions = [
     strengthCalories: null,
     cardioCalories: null,
   },
+  {
+    date: "09.09",
+    part: "腿",
+    groups: "腿部力量＋拉伸",
+    intensity: 70,
+    note: "下肢力量＋拉伸 · 感受适中",
+    feeling: "适中",
+    tone: "lime",
+    time: "18:30–19:30",
+    cardioTime: null,
+    mode: "力量训练 · 下肢",
+    sleep: "一般",
+    warmup: "筋膜松解 · 动态伸展",
+    extraSession: "19:30–20:30 拉伸课 · 1小时",
+    stretchSession: "19:30–20:30 拉伸课 · 1小时",
+    calories: null,
+    actions: [
+      { name: "泽奇深蹲", sets: "12 / 10次×46.8kg · 头皮疼，松解斜角肌并调整呼吸" },
+      { name: "单腿硬拉", sets: "3组 12次×10kg · 间歇90秒" },
+      { name: "杠铃罗马硬拉", sets: "4组 12次×46.8kg · 间歇90秒" },
+      { name: "哑铃弓步行走", sets: "3组 10次×12.5kg×2 · 间歇90秒" },
+      { name: "坐姿勾脚背", sets: "20 / 20 / 15 / 15次；20 / 20 / 20kg / 空 · 间歇90秒" },
+    ],
+    cardio: null,
+    strengthCalories: null,
+    cardioCalories: null,
+  },
 ];
 
 const trainingYear = 2026;
