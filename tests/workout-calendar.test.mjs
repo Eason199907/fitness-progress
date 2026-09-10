@@ -164,6 +164,7 @@ test("initial page shows latest workout with arrows, direct month selection and 
   assert.match(text, /爬坡 · 30分钟 · 坡度12 · 速度3.5/);
   assert.match(text, /75%/);
   assert.match(text, /累计完成16次训练/);
+  assert.doesNotMatch(html, /cardio-dot/);
   assert.match(html, /aria-label="上个月"/);
   assert.match(html, /aria-label="下个月"/);
   assert.match(html, /class="month-title"[^>]*aria-label="2026年9月，选择年月"/);
