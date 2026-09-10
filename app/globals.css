@@ -853,24 +853,6 @@ body {
 .calendar-grid button.selected.cardio-session.stretch-session {
   box-shadow: 0 0 0 2px #e0c2ff, 0 0 10px 3px #a879e8ee, 0 0 0 5px #e1ffef, 0 0 18px 5px #a6ffd1ee, 0 0 28px 7px #6dffc099, 0 0 0 9px #183f6d;
 }
-.workout-marks {
-  position: absolute;
-  right: 4px;
-  bottom: 4px;
-  display: flex;
-  gap: 2px;
-}
-.workout-marks > i:first-child {
-  display: none;
-}
-.cardio-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  display: block;
-  background: #a6ffd1;
-  border: 1px solid #fff;
-}
 .calendar-hint {
   text-align: center;
   font-size: 9px;
@@ -1647,17 +1629,8 @@ footer {
   color: #fff;
   font-size: 8px;
 }
-.cardio-dot {
-  width: 10px;
-  height: 10px;
-  box-shadow: 0 0 0 2px #1e725b;
-}
 @media (max-width: 800px) {
   .day-detail .session-meta {
     grid-template-columns: 1.3fr 1fr 1fr;
-  }
-  .cardio-dot {
-    width: 9px;
-    height: 9px;
   }
 }
