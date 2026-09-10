@@ -372,6 +372,32 @@ const sessions = [
     strengthCalories: null,
     cardioCalories: null,
   },
+  {
+    date: "09.10",
+    part: "胸",
+    groups: "胸部＋肩部＋有氧",
+    intensity: 75,
+    note: "胸肩推举＋爬坡有氧 · 比较累",
+    feeling: "比较累",
+    tone: "coral",
+    time: "18:15–19:15",
+    cardioTime: "19:15–19:45",
+    mode: "力量训练 · 胸部＋肩部",
+    sleep: "良好",
+    warmup: "胸椎灵活 · 前锯肌激活 · 胸小肌松解 · 肩袖热身",
+    calories: null,
+    actions: [
+      { name: "蝴蝶机夹胸", sets: "4组 12次×25kg · 间歇60秒" },
+      { name: "哑铃上斜卧推", sets: "12次×10 / 10 / 12.5 / 12.8kg · 间歇90秒" },
+      { name: "哑铃平板卧推", sets: "4组 12次×12.5kg · 间歇90秒" },
+      { name: "哑铃下斜卧推", sets: "4组 12次×12.5kg · 间歇90秒" },
+      { name: "坐姿推胸", sets: "4组 12次×30kg · 间歇60秒" },
+      { name: "史密斯推肩", sets: "3组 12次×空杆 · 间歇60秒" },
+    ],
+    cardio: "爬坡 · 30分钟 · 坡度12 · 速度3.5",
+    strengthCalories: null,
+    cardioCalories: null,
+  },
 ];
 
 const trainingYear = 2026;
