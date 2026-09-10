@@ -756,12 +756,6 @@ export default function Home() {
                     aria-label={`${selectedYear}年${selectedMonth}月${day}日${workout ? `${workout.part}部训练，查看训练细节` : "无训练记录"}`}
                   >
                     <span>{day}</span>
-                    {workout && (
-                      <span className="workout-marks">
-                        <i />
-                        {workout.cardio && !workout.hideCardioMark && <i className="cardio-dot" />}
-                      </span>
-                    )}
                   </button>
                 ) : (
                   <span className="calendar-blank" key={`home-blank-${i}`} />
@@ -1051,12 +1045,6 @@ export default function Home() {
                         aria-label={`${selectedYear}年${selectedMonth}月${day}日${workout ? `${workout.part}部训练${workout.cardio ? "及有氧训练" : ""}` : "无训练记录"}`}
                       >
                         <span>{day}</span>
-                        {workout && (
-                          <span className="workout-marks">
-                            <i />
-                            {workout.cardio && !workout.hideCardioMark && <i className="cardio-dot" />}
-                          </span>
-                        )}
                       </button>
                     ) : (
                       <span className="calendar-blank" key={`blank-${i}`} />
