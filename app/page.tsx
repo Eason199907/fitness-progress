@@ -398,6 +398,32 @@ const sessions = [
     strengthCalories: null,
     cardioCalories: null,
   },
+  {
+    date: "09.11",
+    part: "背",
+    groups: "背部＋小臂",
+    intensity: 75,
+    note: "背部拉力＋小臂训练 · 比较累",
+    feeling: "比较累",
+    tone: "blue",
+    time: "08:30–09:30",
+    cardioTime: null,
+    mode: "力量训练 · 背部＋小臂",
+    sleep: "良好",
+    warmup: "筋膜松解 · 肩袖激活",
+    calories: null,
+    actions: [
+      { name: "TRX Y形肩", sets: "2组 15次 · 重量未记录" },
+      { name: "悬垂控腹", sets: "2组 30秒 · 与TRX Y形肩交叉进行" },
+      { name: "仰卧反手史密斯划船", sets: "4组 10次×9档 · 间歇90秒" },
+      { name: "高位下拉", sets: "4组 12次×30kg · 间歇90秒" },
+      { name: "坐姿划船", sets: "4组 15次×20kg · 间歇90秒" },
+      { name: "站姿卷绳", sets: "2组 2回合×1.25kg · 正反手交替 · 间歇60秒" },
+    ],
+    cardio: null,
+    strengthCalories: null,
+    cardioCalories: null,
+  },
 ];
 
 const trainingYear = 2026;
