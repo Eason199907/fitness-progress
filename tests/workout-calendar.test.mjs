@@ -18,15 +18,15 @@ vm.runInNewContext(compiled + `
 const data = context.workouts;
 
 test("keeps August records and separates September from August", () => {
-  assert.equal(data.sessions.length, 17);
-  assert.equal(new Set(data.sessions.map((s) => s.date)).size, 17);
+  assert.equal(data.sessions.length, 18);
+  assert.equal(new Set(data.sessions.map((s) => s.date)).size, 18);
   assert.equal(data.sessionsForMonth(8).length, 11);
-  assert.equal(data.sessionsForMonth(9).length, 6);
+  assert.equal(data.sessionsForMonth(9).length, 7);
   assert.equal(data.findSession(8, 1), undefined);
   assert.equal(data.findSession(9, 1).date, "09.01");
   assert.equal(data.latestMonth, 9);
   assert.equal(data.latestDayForMonth(8), 28);
-  assert.equal(data.latestDayForMonth(9), 11);
+  assert.equal(data.latestDayForMonth(9), 25);
 });
 
 test("Sunday-first calendars put September 1 on Tuesday and keep month lengths", () => {
@@ -179,11 +179,11 @@ test("initial page shows latest workout with arrows, direct month selection and 
   const html = renderToStaticMarkup(createElement(context.exports.default));
   const text = html.replace(/<[^>]*>/g, "");
   assert.match(text, /9月训练月历/);
-  assert.match(text, /08:30–09:30/);
-  assert.match(text, /TRX Y形肩/);
-  assert.match(text, /站姿卷绳/);
-  assert.match(text, /75%/);
-  assert.match(text, /累计完成17次训练/);
+  assert.match(text, /07:45–08:45/);
+  assert.match(text, /弓步上台阶转体/);
+  assert.match(text, /器械髋内收/);
+  assert.match(text, /90%/);
+  assert.match(text, /累计完成18次训练/);
   assert.doesNotMatch(html, /cardio-dot/);
   assert.match(html, /aria-label="上个月"/);
   assert.match(html, /aria-label="下个月"/);
