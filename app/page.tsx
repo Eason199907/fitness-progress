@@ -478,6 +478,32 @@ const sessions = [
     strengthCalories: null,
     cardioCalories: null,
   },
+  {
+    date: "09.30",
+    part: "背",
+    groups: "背部＋二头",
+    intensity: 80,
+    note: "背部拉力＋二头训练 · 比较累",
+    feeling: "比较累",
+    tone: "blue",
+    time: "09:00–10:00",
+    cardioTime: null,
+    mode: "力量训练 · 背部＋二头",
+    sleep: "良好",
+    warmup: "筋膜松解 · 肩袖热身",
+    calories: null,
+    actions: [
+      { name: "助力引体", sets: "4组 10次×50kg · 间歇90秒" },
+      { name: "俯身哑铃划船", sets: "4组 12次×10kg×2 · 间歇60秒" },
+      { name: "蝴蝶机下拉", sets: "4组 12次×35kg · 间歇90秒" },
+      { name: "对握坐姿划船", sets: "3组 20次×26kg · 间歇60秒" },
+      { name: "纽泰克下拉", sets: "3组 12次×50kg · 间歇90秒" },
+      { name: "Max二头弯举", sets: "3组 10次×5kg · 间歇60秒" },
+    ],
+    cardio: null,
+    strengthCalories: null,
+    cardioCalories: null,
+  },
 ];
 
 const trainingYear = 2026;
