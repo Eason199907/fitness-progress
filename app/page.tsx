@@ -504,6 +504,33 @@ const sessions = [
     strengthCalories: null,
     cardioCalories: null,
   },
+  {
+    date: "10.04",
+    part: "腿",
+    groups: "腿部力量",
+    intensity: 90,
+    note: "下肢力量训练 · 很累",
+    feeling: "很累",
+    tone: "lime",
+    time: "08:00–10:00",
+    cardioTime: null,
+    mode: "力量训练 · 下肢",
+    sleep: "良好",
+    warmup: "筋膜松解 · 核心激活 · 动态伸展",
+    calories: null,
+    actions: [
+      { name: "泽奇深蹲", sets: "10次×40kg；3组 8次×60kg · 间歇3分钟" },
+      { name: "杠铃相扑硬拉", sets: "2组 12次×40kg · 间歇120秒" },
+      { name: "杠铃相扑硬拉", sets: "4组 12次×60kg · 间歇2分钟" },
+      { name: "弓步行走", sets: "3组 15次×7.5kg×2 · 间歇60秒" },
+      { name: "杠铃臀推", sets: "4组 20次×60kg · 间歇60秒" },
+      { name: "坐姿髋内收", sets: "4组 20次×20kg · 间歇60秒" },
+      { name: "坐姿勾脚背", sets: "4组 25次×空杆 · 间歇60秒" },
+    ],
+    cardio: null,
+    strengthCalories: null,
+    cardioCalories: null,
+  },
 ];
 
 const trainingYear = 2026;
