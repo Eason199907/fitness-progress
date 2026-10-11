@@ -556,6 +556,33 @@ const sessions = [
     strengthCalories: null,
     cardioCalories: null,
   },
+  {
+    date: "10.11",
+    part: "背",
+    groups: "背部力量＋有氧＋网球",
+    intensity: 80,
+    note: "背部力量＋爬坡＋网球 · 比较累",
+    feeling: "比较累",
+    tone: "blue",
+    time: "14:00–15:00",
+    cardioTime: null,
+    mode: "力量训练 · 背部",
+    sleep: "良好",
+    warmup: "筋膜松解 · 肩袖热身 · 金刚撞",
+    calories: null,
+    actions: [
+      { name: "俯身哑铃划船", sets: "12次×10kg×2；3组 12次×15kg×2 · 间歇90秒" },
+      { name: "弹力带引体", sets: "4组 10次×自重 · 间歇90秒" },
+      { name: "TRX 划船", sets: "4组 10次 · 重量未记录 · 间歇90秒" },
+      { name: "单肩下拉", sets: "4组 12次×30kg · 间歇90秒" },
+      { name: "TRX Y形肩", sets: "3组 12次 · 重量未记录 · 间歇90秒" },
+      { name: "蝴蝶机反向飞鸟", sets: "3组 15次×20kg · 间歇60秒" },
+    ],
+    cardio: "爬坡 · 20分钟",
+    extraSession: "网球 · 1小时（具体时间未记录）",
+    strengthCalories: null,
+    cardioCalories: null,
+  },
 ];
 
 const trainingYear = 2026;
