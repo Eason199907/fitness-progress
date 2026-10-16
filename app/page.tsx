@@ -583,6 +583,30 @@ const sessions = [
     strengthCalories: null,
     cardioCalories: null,
   },
+  {
+    date: "10.16",
+    part: "胸",
+    groups: "胸部＋肩部",
+    intensity: 80,
+    note: "胸肩力量训练 · 比较累",
+    feeling: "比较累",
+    tone: "coral",
+    time: "18:00–19:00",
+    cardioTime: null,
+    mode: "力量训练 · 胸部＋肩部",
+    sleep: "一般",
+    warmup: "筋膜松解 · 核心激活 · 胸椎灵活 · 肩袖热身",
+    calories: null,
+    actions: [
+      { name: "蝴蝶机夹胸", sets: "3组 12次×27.5kg · 间歇60秒" },
+      { name: "哑铃平板卧推", sets: "1组 10次×10kg×2；3组 10次×15kg×2 · 间歇120秒" },
+      { name: "哑铃上斜卧推", sets: "4组 12次×12.5kg×2 · 间歇90秒" },
+      { name: "哑铃下斜卧推", sets: "4组 12次×12.5kg×2 · 间歇90秒" },
+    ],
+    cardio: null,
+    strengthCalories: null,
+    cardioCalories: null,
+  },
 ];
 
 const trainingYear = 2026;
