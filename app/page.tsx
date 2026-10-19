@@ -607,6 +607,33 @@ const sessions = [
     strengthCalories: null,
     cardioCalories: null,
   },
+  {
+    date: "10.19",
+    part: "背",
+    groups: "背部力量",
+    intensity: 80,
+    note: "背部力量训练 · 比较累",
+    feeling: "比较累",
+    tone: "blue",
+    time: "13:30–14:30",
+    cardioTime: null,
+    mode: "力量训练 · 背部",
+    sleep: "良好",
+    warmup: "筋膜松解",
+    calories: null,
+    actions: [
+      { name: "TRX 肩飞机", sets: "3组 15次 · 重量未记录 · 间歇60秒" },
+      { name: "TRX Y形肩", sets: "3组 15次 · 重量未记录 · 间歇60秒" },
+      { name: "弹力带引体", sets: "4组 12次 · 重量未记录 · 间歇90秒" },
+      { name: "俯身杠铃划船", sets: "4组 12次×30kg · 间歇90秒" },
+      { name: "高位下拉", sets: "4组 8次×35kg · 间歇90秒" },
+      { name: "坐姿划船", sets: "4组 12次×25kg · 间歇90秒" },
+      { name: "握棍转绳", sets: "3组 各1回合×5kg · 间歇60秒" },
+    ],
+    cardio: null,
+    strengthCalories: null,
+    cardioCalories: null,
+  },
 ];
 
 const trainingYear = 2026;
