@@ -13,22 +13,22 @@ const compiled = ts.transpileModule(source, {
 }).outputText;
 const context = { require: createRequire(import.meta.url), exports: {} };
 vm.runInNewContext(compiled + `
-  globalThis.workouts = { sessions, latestMonth, sessionsForMonth, latestDayForMonth, findSession, calendarDaysForMonth, calendarTone, shiftMonth, currentCalendarMonth, MonthNavigator, bodyAssessment, composition, segmentalFat };
+  globalThis.workouts = { sessions, latestMonth, sessionsForMonth, latestDayForMonth, findSession, calendarDaysForMonth, calendarTone, shiftMonth, currentCalendarMonth, MonthNavigator, bodyAssessment, composition, previousBodyAssessment, previousComposition, segmentalFat };
 `, context);
 const data = context.workouts;
 
 test("keeps August records and separates September from August", () => {
-  assert.equal(data.sessions.length, 26);
-  assert.equal(new Set(data.sessions.map((s) => s.date)).size, 26);
+  assert.equal(data.sessions.length, 28);
+  assert.equal(new Set(data.sessions.map((s) => s.date)).size, 28);
   assert.equal(data.sessionsForMonth(8).length, 11);
   assert.equal(data.sessionsForMonth(9).length, 9);
-  assert.equal(data.sessionsForMonth(10).length, 6);
+  assert.equal(data.sessionsForMonth(10).length, 8);
   assert.equal(data.findSession(8, 1), undefined);
   assert.equal(data.findSession(9, 1).date, "09.01");
   assert.equal(data.latestMonth, 10);
   assert.equal(data.latestDayForMonth(8), 28);
   assert.equal(data.latestDayForMonth(9), 30);
-  assert.equal(data.latestDayForMonth(10), 25);
+  assert.equal(data.latestDayForMonth(10), 30);
 });
 
 test("Sunday-first calendars put September 1 on Tuesday and keep month lengths", () => {
@@ -244,7 +244,7 @@ test("month navigation handles year boundaries, leap years and empty months with
   assert.equal(data.sessionsForMonth(9, 2027).length, 0);
   assert.equal(data.findSession(9, 3, 2027), undefined);
   assert.equal(data.latestDayForMonth(9, 2027), 1);
-  assert.equal(data.sessionsForMonth(10, 2026).length, 6);
+  assert.equal(data.sessionsForMonth(10, 2026).length, 8);
   const current = data.currentCalendarMonth(new Date(2026, 8, 3));
   assert.equal(current.year, 2026);
   assert.equal(current.month, 9);
@@ -254,11 +254,11 @@ test("initial page shows latest workout with arrows, direct month selection and 
   const html = renderToStaticMarkup(createElement(context.exports.default));
   const text = html.replace(/<[^>]*>/g, "");
   assert.match(text, /10月训练月历/);
-  assert.match(text, /14:00–15:00/);
-  assert.match(text, /泽奇深蹲/);
-  assert.match(text, /哥本哈克撑/);
-  assert.match(text, /90%/);
-  assert.match(text, /累计完成26次训练/);
+  assert.match(text, /16:40–17:40/);
+  assert.match(text, /杠铃颈后深蹲/);
+  assert.match(text, /骨盆底部容易翻转/);
+  assert.match(text, /80%/);
+  assert.match(text, /累计完成28次训练/);
   assert.doesNotMatch(html, /cardio-dot/);
   assert.match(html, /aria-label="上个月"/);
   assert.match(html, /aria-label="下个月"/);
@@ -269,7 +269,7 @@ test("initial page shows latest workout with arrows, direct month selection and 
     assert.ok(html.includes(`aria-label="2026年${month}月" aria-pressed="${month === 10}"`));
   }
   assert.match(text, /回到本月/);
-  assert.match(html, /aria-label="2026年10月25日腿部训练，查看训练细节"/);
+  assert.match(html, /aria-label="2026年10月30日腿部训练，查看训练细节"/);
   assert.doesNotMatch(html, /aria-label="2026年10月32日/);
 });
 
@@ -285,13 +285,13 @@ test("navigator disables year boundary arrows and leaves only the selected month
 });
 
 test("September 4 body assessment keeps the complete Visbody snapshot and comparison", () => {
-  assert.equal(data.bodyAssessment.date, "2026.09.04");
-  assert.equal(data.bodyAssessment.time, "14:47");
-  assert.equal(data.bodyAssessment.comparedWith, "2026.08.16");
-  assert.equal(data.bodyAssessment.bodyScore, 69);
-  assert.equal(data.bodyAssessment.postureScore, 83);
-  assert.equal(data.composition.length, 15);
-  const metric = (name) => data.composition.find((item) => item.name === name);
+  assert.equal(data.previousBodyAssessment.date, "2026.09.04");
+  assert.equal(data.previousBodyAssessment.time, "14:47");
+  assert.equal(data.previousBodyAssessment.comparedWith, "2026.08.16");
+  assert.equal(data.previousBodyAssessment.bodyScore, 69);
+  assert.equal(data.previousBodyAssessment.postureScore, 83);
+  assert.equal(data.previousComposition.length, 15);
+  const metric = (name) => data.previousComposition.find((item) => item.name === name);
   assert.equal(metric("体重").value, "69.3");
   assert.equal(metric("体重").change, "↓0.2");
   assert.equal(metric("体脂率").value, "22.8");
