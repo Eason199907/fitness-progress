@@ -661,6 +661,59 @@ const sessions = [
     strengthCalories: null,
     cardioCalories: null,
   },
+  {
+    date: "10.28",
+    part: "胸",
+    groups: "胸部＋肩部",
+    intensity: 90,
+    note: "胸肩力量＋爬楼梯30分钟 · 比较累",
+    feeling: "比较累",
+    tone: "coral",
+    time: "19:00–20:00",
+    cardioTime: null,
+    mode: "力量训练 · 胸部＋肩部",
+    sleep: "良好",
+    warmup: "肩袖热身 · 胸椎灵活",
+    calories: null,
+    actions: [
+      { name: "杠铃平板卧推", sets: "10次×20kg；8次×40kg；8次×50kg；4次×60kg（辅助） · 间歇3分钟" },
+      { name: "哑铃上斜卧推", sets: "4组 12次×15kg×2 · 间歇2分钟" },
+      { name: "Panatta下斜卧推", sets: "4组 12次×5kg · 间歇2分钟" },
+      { name: "纽泰克下斜夹胸", sets: "3组 12次×20kg · 间歇90秒" },
+      { name: "龙门架单肩侧飞鸟", sets: "4组 15次×5kg · 无间歇" },
+    ],
+    cardio: "爬楼梯 · 30分钟（力量训练结束后）",
+    strengthCalories: null,
+    cardioCalories: null,
+  },
+  {
+    date: "10.30",
+    part: "腿",
+    groups: "腿部力量",
+    intensity: 80,
+    note: "腿部力量训练 · 比较累",
+    feeling: "比较累",
+    tone: "lime",
+    time: "16:40–17:40",
+    cardioTime: null,
+    mode: "力量训练 · 下肢",
+    sleep: "好",
+    warmup: "筋膜松解 · 核心激活 · 动态伸展",
+    calories: null,
+    actions: [
+      { name: "跪跳起", sets: "2组 10次 · 下肢爆发 · 间歇2分钟" },
+      { name: "杠铃颈后深蹲", sets: "2组 12次×40kg · 预热" },
+      { name: "杠铃颈后深蹲", sets: "3组 12次×60kg · 间歇2分钟" },
+      { name: "单腿硬拉", sets: "3组 12次×15kg · 间歇2分钟" },
+      { name: "杠铃弓步行走", sets: "3组 12次×30kg · 间歇2分钟" },
+      { name: "杠铃相扑硬拉", sets: "10 / 10 / 10 / 8次×60kg · 骨盆底部容易翻转 · 间歇2分钟" },
+      { name: "臀推", sets: "4组 12次×80kg · 间歇90秒" },
+      { name: "倒蹬", sets: "4组 12次×160kg · 间歇90秒" },
+    ],
+    cardio: null,
+    strengthCalories: null,
+    cardioCalories: null,
+  },
 ];
 
 const trainingYear = 2026;
@@ -802,7 +855,7 @@ function calendarTone(session: (typeof sessions)[number] | undefined) {
   const tone = session.tone === "split-chest-back" ? "split-chest-back" : session.tone;
   return `${tone}${session.cardio ? " cardio-session" : ""}${session.stretchSession ? " stretch-session" : ""}`;
 }
-const bodyAssessment = {
+const previousBodyAssessment = {
   date: "2026.09.04",
   time: "14:47",
   comparedWith: "2026.08.16",
@@ -815,7 +868,7 @@ const bodyAssessment = {
   summary: "整体变化不大：体重下降0.2kg，肌肉量下降0.1kg，体脂率保持22.8%。",
   postureNote: "设备提示可能存在头前引、头侧歪、右圆肩、骨盆前移和身体倾斜。",
 };
-const composition = [
+const previousComposition = [
   { name: "体重", value: "69.3", unit: "kg", status: "正常", change: "↓0.2" },
   { name: "BMI", value: "21.9", unit: "", status: "正常", change: "持平" },
   { name: "体脂率", value: "22.8", unit: "%", status: "略高", change: "持平" },
@@ -831,6 +884,28 @@ const composition = [
   { name: "内脏脂肪", value: "5.0", unit: "级", status: "正常", change: "持平" },
   { name: "基础代谢", value: "1567.5", unit: "kcal/d", status: "正常", change: "↓3.1" },
   { name: "腰臀比", value: "0.88", unit: "", status: "正常", change: "持平" },
+];
+const bodyAssessment = {
+  date: "2026.10.28",
+  comparedWith: "2026.09.04",
+  summary: "较9月4日：体重增加1.6kg，肌肉量增加1.2kg，骨骼肌增加0.9kg，体脂率下降0.3个百分点。",
+};
+const composition = [
+  { name: "体重", value: "70.9", unit: "kg", status: "正常", change: "↑1.6 kg" },
+  { name: "BMI", value: "22.4", unit: "", status: "正常", change: "↑0.5" },
+  { name: "体脂率", value: "22.5", unit: "%", status: "略高", change: "↓0.3 个百分点" },
+  { name: "体脂肪", value: "15.9", unit: "kg", status: "正常", change: "↑0.1 kg" },
+  { name: "肌肉量", value: "51.6", unit: "kg", status: "正常", change: "↑1.2 kg" },
+  { name: "骨骼肌", value: "32.1", unit: "kg", status: "正常", change: "↑0.9 kg" },
+  { name: "去脂体重", value: "55.0", unit: "kg", status: "正常", change: "↑1.5 kg" },
+  { name: "总水分", value: "39.7", unit: "kg", status: "正常", change: "↑1.1 kg" },
+  { name: "细胞内液", value: "24.9", unit: "kg", status: "正常", change: "↑0.7 kg" },
+  { name: "细胞外液", value: "14.8", unit: "kg", status: "正常下限", change: "↑0.4 kg" },
+  { name: "无机盐", value: "4.0", unit: "kg", status: "正常", change: "↑0.1 kg" },
+  { name: "蛋白质", value: "11.3", unit: "kg", status: "正常", change: "↑0.3 kg" },
+  { name: "内脏脂肪", value: "5.0", unit: "级", status: "正常", change: "变化未显示" },
+  { name: "基础代谢", value: "—", unit: "kcal/d", status: "当前值未完整显示", change: "↑33.0 kcal/d" },
+  { name: "腰臀比", value: "0.88", unit: "", status: "正常", change: "变化未显示" },
 ];
 const segmentalFat = [
   ["右上肢", "0.8"],
@@ -1137,7 +1212,7 @@ export default function Home() {
                   <span>估算消耗</span>
                   <b>{selectedSession.calories ? `${selectedSession.calories} kcal` : "未估算"}</b>
                 </div>
-                {selectedSession.cardio && (
+                {selectedSession.cardio && selectedSession.strengthCalories && selectedSession.cardioCalories && (
                   <div className="energy-breakdown">
                     力量 {selectedSession.strengthCalories} kcal · 有氧{" "}
                     {selectedSession.cardioCalories} kcal
@@ -1180,30 +1255,30 @@ export default function Home() {
               <p>AT A GLANCE</p>
               <h2>当前身体状态</h2>
             </div>
-            <span>最新体测 · 09.04</span>
+            <span>最新体测 · 10.28</span>
           </section>
           <div className="metric-grid">
             <article className="metric feature">
               <span>体脂率</span>
               <strong>
-                22.8<small>%</small>
+                22.5<small>%</small>
               </strong>
               <div className="meter">
-                <i style={{ width: "76%" }} />
+                <i style={{ width: "75%" }} />
               </div>
               <p>设备标准略高 · 优先缓慢下降</p>
             </article>
             <article className="metric">
               <span>骨骼肌</span>
               <strong>
-                31.2<small>kg</small>
+                32.1<small>kg</small>
               </strong>
               <p className="good">正常 · 有提升空间</p>
             </article>
             <article className="metric">
               <span>肌肉量</span>
               <strong>
-                50.4<small>kg</small>
+                51.6<small>kg</small>
               </strong>
               <p>处于设备正常范围下端</p>
             </article>
@@ -1424,7 +1499,7 @@ export default function Home() {
                       <span>估算消耗</span>
                       <b>{selectedSession.calories ? `${selectedSession.calories} kcal` : "未估算"}</b>
                     </div>
-                    {selectedSession.cardio && (
+                    {selectedSession.cardio && selectedSession.strengthCalories && selectedSession.cardioCalories && (
                       <div className="energy-breakdown">
                         力量 {selectedSession.strengthCalories} kcal · 有氧{" "}
                         {selectedSession.cardioCalories} kcal
@@ -1491,24 +1566,24 @@ export default function Home() {
               <p>BODY COMPOSITION</p>
               <h2>身体成分与围度</h2>
             </div>
-            <span>Visbody · 09.04 14:47</span>
+            <span>Visbody · 10.28</span>
           </section>
           <section className="body-test-summary" aria-label="本次体测概览">
             <article>
               <span>体成分评分</span>
-              <strong>{bodyAssessment.bodyScore}</strong>
-              <p>与上次持平</p>
+              <strong>—</strong>
+              <p>本次截图未提供 · 09.04评分 {previousBodyAssessment.bodyScore}</p>
             </article>
             <article>
               <span>体态评分</span>
-              <strong>{bodyAssessment.postureScore}</strong>
-              <p>较上次 ↓2</p>
+              <strong>—</strong>
+              <p>本次截图未提供 · 09.04评分 {previousBodyAssessment.postureScore}</p>
             </article>
             <article className="body-test-note">
               <span>对比 {bodyAssessment.comparedWith.slice(5)}</span>
-              <h3>整体稳定</h3>
+              <h3>本次体测变化</h3>
               <p>{bodyAssessment.summary}</p>
-              <small>{bodyAssessment.postureNote}</small>
+              <small>变化量按设备截图记录；基础代谢当前数值未完整显示。</small>
             </article>
           </section>
           <div className="composition-grid">
@@ -1526,13 +1601,28 @@ export default function Home() {
               </article>
             ))}
           </div>
+          <details className="panel body-history">
+            <summary>查看09.04历史体测（对比08.16）</summary>
+            <p>{previousBodyAssessment.summary}</p>
+            <p>体成分评分 {previousBodyAssessment.bodyScore} · 体态评分 {previousBodyAssessment.postureScore} · {previousBodyAssessment.date} {previousBodyAssessment.time}</p>
+            <p>{previousBodyAssessment.postureNote}</p>
+            <div className="composition-grid">
+              {previousComposition.map((item) => (
+                <article key={item.name}>
+                  <span>{item.name}</span>
+                  <strong>{item.value}<small>{item.unit}</small></strong>
+                  <div className="composition-meta"><p>{item.status}</p><em>{item.change}</em></div>
+                </article>
+              ))}
+            </div>
+          </details>
           <section className="panel segmental-fat">
             <div className="panel-title">
               <div>
                 <p>SEGMENTAL FAT</p>
-                <h3>本次节段脂肪</h3>
+                <h3>09.04 节段脂肪记录</h3>
               </div>
-              <b>单位 kg</b>
+              <b>本次未提供 · kg</b>
             </div>
             <div className="segmental-fat-grid">
               {segmentalFat.map(([name, value]) => (
@@ -1565,7 +1655,7 @@ export default function Home() {
           </section>
           <div className="symmetry">
             <div>
-              <p>本次节段脂肪</p>
+              <p>09.04 节段脂肪记录</p>
               <h3>下肢左右均为 2.4 kg</h3>
               <span>左右一致</span>
             </div>
