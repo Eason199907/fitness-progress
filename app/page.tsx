@@ -1188,8 +1188,8 @@ export default function Home() {
                   </div>
                 )}
                 <div className="exercise-table">
-                  {selectedSession.actions.map((a) => (
-                    <div key={a.name}>
+                  {selectedSession.actions.map((a, index) => (
+                    <div key={`${selectedSession.date}-${index}`}>
                       <ExerciseIcon name={a.name} />
                       <b>{a.name}</b>
                       <span>{a.sets}</span>
@@ -1472,8 +1472,8 @@ export default function Home() {
                       </div>
                     )}
                     <div className="exercise-table">
-                      {selectedSession.actions.map((a) => (
-                        <div key={a.name}>
+                      {selectedSession.actions.map((a, index) => (
+                        <div key={`${selectedSession.date}-${index}`}>
                           <ExerciseIcon name={a.name} />
                           <b>{a.name}</b>
                           <span>{a.sets}</span>
