@@ -232,6 +232,14 @@ test("October 25 leg workout preserves weight progression and timed Copenhagen h
   assert.equal(data.calendarTone(workout), "lime");
 });
 
+test("repeated exercise names keep separate rows when switching workout days", () => {
+  const october30 = data.findSession(10, 30);
+  assert.equal(october30.actions.filter((a) => a.name === "杠铃颈后深蹲").length, 2);
+  assert.equal((source.match(/key=\{`\$\{selectedSession\.date\}-\$\{index\}`\}/g) || []).length, 2);
+  assert.doesNotMatch(source, /key=\{a\.name\}/);
+  assert.equal(data.findSession(10, 6).actions.some((a) => a.name === "杠铃颈后深蹲"), false);
+});
+
 test("month navigation handles year boundaries, leap years and empty months without repeating records", () => {
   const next = data.shiftMonth(2026, 12, 1);
   const previous = data.shiftMonth(2026, 1, -1);
