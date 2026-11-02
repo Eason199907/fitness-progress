@@ -714,6 +714,30 @@ const sessions = [
     strengthCalories: null,
     cardioCalories: null,
   },
+  {
+    date: "11.01",
+    part: "胸",
+    groups: "胸部为主＋背部辅助",
+    intensity: 75,
+    note: "自主训练 · 胸部为主",
+    tone: "coral",
+    time: "时间未记录",
+    cardioTime: null,
+    mode: "自主力量训练 · 胸部为主",
+    sleep: "一般",
+    warmup: "未记录",
+    calories: null,
+    actions: [
+      { name: "哑铃平板卧推", sets: "1组 12次×12.5kg；4组 12次×15kg" },
+      { name: "哑铃上斜卧推", sets: "4组 12次×15kg" },
+      { name: "哑铃下斜卧推", sets: "2组 12次×15kg；1组 10次×15kg；1组 12次×12.5kg" },
+      { name: "蝴蝶机夹胸", sets: "3组 15次×27kg" },
+      { name: "高位下拉", sets: "2组 12次×36kg；1组 10次×36kg；1组 12次×32kg" },
+    ],
+    cardio: null,
+    strengthCalories: null,
+    cardioCalories: null,
+  },
 ];
 
 const trainingYear = 2026;
