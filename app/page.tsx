@@ -758,6 +758,7 @@ const sessions = [
       { name: "单臂哑铃划船", sets: "3组 12次×12.5kg · 间歇90秒" },
       { name: "高位下拉", sets: "4组 12次×30kg · 间歇90秒" },
       { name: "坐姿划船", sets: "4组 15次×20kg · 间歇60秒" },
+      { name: "握棍转绳", sets: "4组×1.25kg · 次数未记录" },
     ],
     cardio: null,
     strengthCalories: null,
