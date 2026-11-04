@@ -267,12 +267,14 @@ test("November 3 back workout records sets, short sleep and assessment", () => {
   assert.equal(workout.intensity, 60);
   assert.match(workout.warmup, /筋膜松解 · 猫牛式 · Y\/T\/W肩部激活/);
   assert.equal(workout.assessment, "自主完成握棍转绳");
-  assert.equal(workout.actions.length, 5);
+  assert.equal(workout.actions.length, 6);
   assert.match(workout.actions[0].sets, /3组 15次 · 重量未记录 · 间歇90秒/);
   assert.match(workout.actions[1].sets, /4组 8次 · 重量未记录 · 间歇2分钟/);
   assert.match(workout.actions[2].sets, /3组 12次×12.5kg · 间歇90秒/);
   assert.match(workout.actions[3].sets, /4组 12次×30kg · 间歇90秒/);
   assert.match(workout.actions[4].sets, /4组 15次×20kg · 间歇60秒/);
+  assert.equal(workout.actions[5].name, "握棍转绳");
+  assert.match(workout.actions[5].sets, /4组×1.25kg · 次数未记录/);
   assert.equal(workout.cardio, null);
   assert.equal(data.calendarTone(workout), "blue");
 });
