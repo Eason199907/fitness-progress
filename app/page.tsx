@@ -738,6 +738,31 @@ const sessions = [
     strengthCalories: null,
     cardioCalories: null,
   },
+  {
+    date: "11.03",
+    part: "背",
+    groups: "背部力量",
+    intensity: 60,
+    note: "背部训练 · 自主完成握棍转绳",
+    assessment: "自主完成握棍转绳",
+    tone: "blue",
+    time: "09:00–10:00",
+    cardioTime: null,
+    mode: "力量训练 · 背部",
+    sleep: "时间短",
+    warmup: "筋膜松解 · 猫牛式 · Y/T/W肩部激活",
+    calories: null,
+    actions: [
+      { name: "TRX 肩飞机", sets: "3组 15次 · 重量未记录 · 间歇90秒" },
+      { name: "弹力带引体", sets: "4组 8次 · 重量未记录 · 间歇2分钟" },
+      { name: "单臂哑铃划船", sets: "3组 12次×12.5kg · 间歇90秒" },
+      { name: "高位下拉", sets: "4组 12次×30kg · 间歇90秒" },
+      { name: "坐姿划船", sets: "4组 15次×20kg · 间歇60秒" },
+    ],
+    cardio: null,
+    strengthCalories: null,
+    cardioCalories: null,
+  },
 ];
 
 const trainingYear = 2026;
@@ -985,7 +1010,7 @@ function intensityTone(value: number | null) {
 
 function sleepTone(value: string) {
   if (value.includes("良好")) return "good";
-  if (value.includes("较差")) return "poor";
+  if (value.includes("较差") || value.includes("时间短")) return "poor";
   return "fair";
 }
 
@@ -1197,6 +1222,12 @@ export default function Home() {
                   <div className="warmup-block">
                     <span>训练感受</span>
                     <b>{selectedSession.feeling}</b>
+                  </div>
+                )}
+                {selectedSession.assessment && (
+                  <div className="warmup-block">
+                    <span>训练评估</span>
+                    <b>{selectedSession.assessment}</b>
                   </div>
                 )}
                 {selectedSession.diet && (
@@ -1487,6 +1518,12 @@ export default function Home() {
                       <div className="warmup-block">
                         <span>训练感受</span>
                         <b>{selectedSession.feeling}</b>
+                      </div>
+                    )}
+                    {selectedSession.assessment && (
+                      <div className="warmup-block">
+                        <span>训练评估</span>
+                        <b>{selectedSession.assessment}</b>
                       </div>
                     )}
                     {selectedSession.diet && (
