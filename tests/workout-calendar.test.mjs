@@ -18,19 +18,19 @@ vm.runInNewContext(compiled + `
 const data = context.workouts;
 
 test("keeps August records and separates September from August", () => {
-  assert.equal(data.sessions.length, 30);
-  assert.equal(new Set(data.sessions.map((s) => s.date)).size, 30);
+  assert.equal(data.sessions.length, 31);
+  assert.equal(new Set(data.sessions.map((s) => s.date)).size, 31);
   assert.equal(data.sessionsForMonth(8).length, 11);
   assert.equal(data.sessionsForMonth(9).length, 9);
   assert.equal(data.sessionsForMonth(10).length, 8);
-  assert.equal(data.sessionsForMonth(11).length, 2);
+  assert.equal(data.sessionsForMonth(11).length, 3);
   assert.equal(data.findSession(8, 1), undefined);
   assert.equal(data.findSession(9, 1).date, "09.01");
   assert.equal(data.latestMonth, 11);
   assert.equal(data.latestDayForMonth(8), 28);
   assert.equal(data.latestDayForMonth(9), 30);
   assert.equal(data.latestDayForMonth(10), 30);
-  assert.equal(data.latestDayForMonth(11), 3);
+  assert.equal(data.latestDayForMonth(11), 5);
 });
 
 test("Sunday-first calendars put September 1 on Tuesday and keep month lengths", () => {
@@ -279,6 +279,25 @@ test("November 3 back workout records sets, short sleep and assessment", () => {
   assert.equal(data.calendarTone(workout), "blue");
 });
 
+test("November 5 leg workout keeps jump rotations and failed 100kg attempt distinct", () => {
+  const workout = data.findSession(11, 5);
+  assert.equal(workout.time, "11:00–12:00");
+  assert.equal(workout.sleep, "良好");
+  assert.equal(workout.intensity, 90);
+  assert.equal(workout.feeling, "比较累");
+  assert.equal(workout.warmup, "筋膜松解 · 动态伸展");
+  assert.equal(workout.actions.length, 8);
+  assert.match(workout.actions[0].sets, /第1组原地；第2组转体90°；第3组转体180°/);
+  assert.match(workout.actions[1].sets, /10次×60kg；5次×80kg；5次×90kg/);
+  assert.match(workout.actions[2].sets, /第1组 3次×100kg；第2组 3次×100kg，最后一次尝试未拉起（未计入完成次数）/);
+  assert.match(workout.actions[3].sets, /2组 12次×40kg/);
+  assert.match(workout.actions[4].sets, /3组 12次×60kg/);
+  assert.match(workout.actions[5].sets, /12次×60kg；8次×60kg；12次×40kg；12次×40kg/);
+  assert.match(workout.actions[6].sets, /3组 12次×7.5kg×2/);
+  assert.match(workout.actions[7].sets, /4组 15次×25kg/);
+  assert.equal(workout.cardio, null);
+});
+
 test("month navigation handles year boundaries, leap years and empty months without repeating records", () => {
   const next = data.shiftMonth(2026, 12, 1);
   const previous = data.shiftMonth(2026, 1, -1);
@@ -301,11 +320,11 @@ test("initial page shows latest workout with arrows, direct month selection and 
   const html = renderToStaticMarkup(createElement(context.exports.default));
   const text = html.replace(/<[^>]*>/g, "");
   assert.match(text, /11月训练月历/);
-  assert.match(text, /09:00–10:00/);
-  assert.match(text, /TRX 肩飞机/);
-  assert.match(text, /自主完成握棍转绳/);
-  assert.match(text, /60%/);
-  assert.match(text, /累计完成30次训练/);
+  assert.match(text, /11:00–12:00/);
+  assert.match(text, /跪跳起/);
+  assert.match(text, /最后一次尝试未拉起/);
+  assert.match(text, /90%/);
+  assert.match(text, /累计完成31次训练/);
   assert.doesNotMatch(html, /cardio-dot/);
   assert.match(html, /aria-label="上个月"/);
   assert.match(html, /aria-label="下个月"/);
@@ -316,7 +335,7 @@ test("initial page shows latest workout with arrows, direct month selection and 
     assert.ok(html.includes(`aria-label="2026年${month}月" aria-pressed="${month === 11}"`));
   }
   assert.match(text, /回到本月/);
-  assert.match(html, /aria-label="2026年11月3日背部训练，查看训练细节"/);
+  assert.match(html, /aria-label="2026年11月5日腿部训练，查看训练细节"/);
   assert.doesNotMatch(html, /aria-label="2026年11月32日/);
 });
 
