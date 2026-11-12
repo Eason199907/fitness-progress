@@ -306,13 +306,15 @@ test("November 10 chest workout and stair cardio keep timing and intensity separ
   assert.equal(workout.sleep, "良好");
   assert.equal(workout.feeling, "比较累");
   assert.equal(workout.warmup, "筋膜松解 · 胸椎灵活 · 前锯肌激活");
-  assert.equal(workout.assessment, "自主完成腹部训练（动作明细未记录）");
-  assert.equal(workout.actions.length, 5);
+  assert.equal(workout.assessment, "自主完成腹部训练");
+  assert.equal(workout.actions.length, 6);
   assert.match(workout.actions[0].sets, /3组 12次×25kg · 间歇90秒/);
   assert.match(workout.actions[1].sets, /3组 10次×50kg · 辅助完成 · 间歇2分钟/);
   assert.match(workout.actions[2].sets, /4组 12次×20kg · 间歇2分钟/);
   assert.match(workout.actions[3].sets, /3组 12次×5kg · 间歇2分钟/);
   assert.match(workout.actions[4].sets, /3组 12次×37.5kg · 间歇2分钟/);
+  assert.equal(workout.actions[5].name, "卷腹机");
+  assert.equal(workout.actions[5].sets, "空杆 · 3个方向各2组 · 次数未记录");
   assert.equal(workout.cardio, "爬楼梯 · 30分钟 · 强度档位3–4");
   assert.match(data.calendarTone(workout), /coral cardio-session/);
 });
