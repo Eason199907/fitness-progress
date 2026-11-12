@@ -792,6 +792,32 @@ const sessions = [
     strengthCalories: null,
     cardioCalories: null,
   },
+  {
+    date: "11.10",
+    part: "胸",
+    groups: "胸部力量＋腹部训练＋有氧",
+    intensity: 80,
+    note: "胸部训练＋自主完成腹部训练＋爬楼梯30分钟 · 比较累",
+    feeling: "比较累",
+    assessment: "自主完成腹部训练（动作明细未记录）",
+    tone: "coral",
+    time: "14:00–15:00",
+    cardioTime: "15:00–15:30",
+    mode: "力量训练 · 胸部",
+    sleep: "良好",
+    warmup: "筋膜松解 · 胸椎灵活 · 前锯肌激活",
+    calories: null,
+    actions: [
+      { name: "蝴蝶机夹胸", sets: "3组 12次×25kg · 间歇90秒" },
+      { name: "杠铃平板卧推", sets: "3组 10次×50kg · 辅助完成 · 间歇2分钟" },
+      { name: "Max上斜卧推", sets: "4组 12次×20kg · 间歇2分钟" },
+      { name: "Panatta下斜分推", sets: "3组 12次×5kg · 间歇2分钟" },
+      { name: "纽泰克坐姿推胸", sets: "3组 12次×37.5kg · 间歇2分钟" },
+    ],
+    cardio: "爬楼梯 · 30分钟 · 强度档位3–4",
+    strengthCalories: null,
+    cardioCalories: null,
+  },
 ];
 
 const trainingYear = 2026;
