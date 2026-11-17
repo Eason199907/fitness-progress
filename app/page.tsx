@@ -869,6 +869,30 @@ const sessions = [
     strengthCalories: null,
     cardioCalories: null,
   },
+  {
+    date: "11.17",
+    part: "胸",
+    groups: "胸部力量",
+    intensity: null,
+    note: "公司健身房 · 胸部训练",
+    tone: "coral",
+    time: "时间未记录",
+    cardioTime: null,
+    mode: "力量训练 · 胸部（公司健身房）",
+    sleep: "未记录",
+    warmup: "未记录",
+    calories: null,
+    actions: [
+      { name: "器械夹胸", sets: "15次×25kg；3组 12次×30kg · 间歇1分钟" },
+      { name: "杠铃平板卧推", sets: "第1–2组 各12次×30kg；第3组 12次×40kg；第4–5组 各10次×40kg · 间歇90秒，第4组注明间歇3分钟" },
+      { name: "哑铃上斜卧推", sets: "10次×28kg；3组 12次×28kg · 间歇3分钟" },
+      { name: "哑铃下斜卧推", sets: "8次×28kg；3组 12次×24kg · 间歇未记录" },
+      { name: "器械推胸", sets: "第1–2组 每组5次×20kg＋5次×15kg；第3组 10次×15kg · 间歇90秒" },
+    ],
+    cardio: null,
+    strengthCalories: null,
+    cardioCalories: null,
+  },
 ];
 
 const trainingYear = 2026;
