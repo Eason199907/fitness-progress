@@ -18,19 +18,19 @@ vm.runInNewContext(compiled + `
 const data = context.workouts;
 
 test("keeps August records and separates September from August", () => {
-  assert.equal(data.sessions.length, 35);
-  assert.equal(new Set(data.sessions.map((s) => s.date)).size, 35);
+  assert.equal(data.sessions.length, 36);
+  assert.equal(new Set(data.sessions.map((s) => s.date)).size, 36);
   assert.equal(data.sessionsForMonth(8).length, 11);
   assert.equal(data.sessionsForMonth(9).length, 9);
   assert.equal(data.sessionsForMonth(10).length, 8);
-  assert.equal(data.sessionsForMonth(11).length, 7);
+  assert.equal(data.sessionsForMonth(11).length, 8);
   assert.equal(data.findSession(8, 1), undefined);
   assert.equal(data.findSession(9, 1).date, "09.01");
   assert.equal(data.latestMonth, 11);
   assert.equal(data.latestDayForMonth(8), 28);
   assert.equal(data.latestDayForMonth(9), 30);
   assert.equal(data.latestDayForMonth(10), 30);
-  assert.equal(data.latestDayForMonth(11), 17);
+  assert.equal(data.latestDayForMonth(11), 18);
 });
 
 test("Sunday-first calendars put September 1 on Tuesday and keep month lengths", () => {
@@ -377,9 +377,10 @@ test("initial page shows latest workout with arrows, direct month selection and 
   const text = html.replace(/<[^>]*>/g, "");
   assert.match(text, /11月训练月历/);
   assert.match(text, /时间未记录/);
-  assert.match(text, /公司健身房/);
-  assert.match(text, /第1–2组 每组5次×20kg＋5次×15kg/);
-  assert.match(text, /累计完成35次训练/);
+  assert.match(text, /西安健身房/);
+  assert.match(text, /第4组 6次×36kg＋6次×32kg/);
+  assert.match(text, /练后疲惫程度一般/);
+  assert.match(text, /累计完成36次训练/);
   assert.doesNotMatch(html, /cardio-dot/);
   assert.match(html, /aria-label="上个月"/);
   assert.match(html, /aria-label="下个月"/);
@@ -390,7 +391,7 @@ test("initial page shows latest workout with arrows, direct month selection and 
     assert.ok(html.includes(`aria-label="2026年${month}月" aria-pressed="${month === 11}"`));
   }
   assert.match(text, /回到本月/);
-  assert.match(html, /aria-label="2026年11月17日胸部训练，查看训练细节"/);
+  assert.match(html, /aria-label="2026年11月18日背部训练，查看训练细节"/);
   assert.doesNotMatch(html, /aria-label="2026年11月32日/);
 });
 
