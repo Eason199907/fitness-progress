@@ -880,7 +880,7 @@ const sessions = [
     cardioTime: null,
     mode: "力量训练 · 胸部（公司健身房）",
     sleep: "未记录",
-    warmup: "未记录",
+    warmup: "筋膜松解 · 胸椎灵活",
     calories: null,
     actions: [
       { name: "器械夹胸", sets: "15次×25kg；3组 12次×30kg · 间歇1分钟" },
@@ -905,7 +905,7 @@ const sessions = [
     cardioTime: null,
     mode: "力量训练 · 背部（西安健身房）",
     sleep: "良好",
-    warmup: "未记录",
+    warmup: "筋膜松解 · 胸椎灵活",
     calories: null,
     actions: [
       { name: "高位下拉", sets: "第1组 12次×32kg；第2–5组 各12次×36kg · 间歇90秒" },
