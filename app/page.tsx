@@ -893,6 +893,30 @@ const sessions = [
     strengthCalories: null,
     cardioCalories: null,
   },
+  {
+    date: "11.18",
+    part: "背",
+    groups: "背部力量",
+    intensity: null,
+    note: "西安健身房 · 背部训练 · 练后疲惫程度一般",
+    feeling: "练后疲惫程度一般",
+    tone: "blue",
+    time: "时间未记录",
+    cardioTime: null,
+    mode: "力量训练 · 背部（西安健身房）",
+    sleep: "良好",
+    warmup: "未记录",
+    calories: null,
+    actions: [
+      { name: "高位下拉", sets: "第1组 12次×32kg；第2–5组 各12次×36kg · 间歇90秒" },
+      { name: "单臂哑铃划船", sets: "4组 12次×12.5kg · 间歇90秒" },
+      { name: "坐姿划船", sets: "第1组 12次×36kg；第2–4组 各12次×32kg · 间歇90秒" },
+      { name: "直臂下压", sets: "第1–3组 各12次×36kg；第4组 6次×36kg＋6次×32kg · 间歇90秒，第2、3组注明间歇60秒" },
+    ],
+    cardio: null,
+    strengthCalories: null,
+    cardioCalories: null,
+  },
 ];
 
 const trainingYear = 2026;
