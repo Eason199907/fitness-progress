@@ -930,6 +930,8 @@ const sessions = [
     mode: "力量训练 · 上肢（胸背超级组）",
     sleep: "良好",
     warmup: "筋膜松解 · 胸椎灵活 · 肩袖热身",
+    extraSession: "拉伸课 · 腿部拉伸1小时（具体时段未记录）",
+    stretchSession: "拉伸课 · 腿部拉伸1小时（具体时段未记录）",
     calories: null,
     actions: [
       { name: "龙门架下斜夹胸", sets: "4组 12次×15kg · 与直臂下压组成超级组" },
